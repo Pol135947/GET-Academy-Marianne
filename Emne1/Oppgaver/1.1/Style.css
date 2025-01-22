@@ -1,0 +1,17 @@
+#h2{
+    padding:10px;
+    color: white;
+    width: 500px;
+    border:solid 1px grey;
+    margin: 20px;
+    text-align: center;
+}
+#body{
+    background-color: lightblue;
+    padding:10px;
+    color: black;
+    width: 500px;
+    border:solid 1px black;
+    margin: 20px;
+    text-align: justify;
+}

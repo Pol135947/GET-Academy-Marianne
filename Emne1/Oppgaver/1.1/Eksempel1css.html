@@ -4,24 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eksempel 1 med CSS-kode</title>
+    <link rel="stylesheet" href="Style.css">
     <style>
-        h2{
-            padding:10px;
-            color: white;
-            width: 500px;
-            border:solid 1px grey;
-            margin: 20px;
-            text-align: center;
-        }
-        div{
-            background-color: lightblue;
-            padding:10px;
-            color: black;
-            width: 500px;
-            border:solid 1px black;
-            margin: 20px;
-            text-align: justify;
-        }
 
     </style>
 </head>
@@ -32,8 +16,8 @@
     <button> Grid layout </button>
 
     <h1> Eksempel 1</h1>
-    <h2 style = "background-color: green;">Verktøy</h2>
-    <div>
+    <h2 id="h2" style = "background-color: green;">Verktøy</h2>
+    <div id="body">
         De to viktigste verktøyene vi skal bruke er disse:
         <ul>
             <li>
@@ -51,8 +35,8 @@
         </ul>
     </div>
 
-    <h2 style="background-color: blue;"> HTML </h2>
-    <div> Vi bruker HTML til å definere et dokument.
+    <h2 id="h2" style="background-color: blue;"> HTML </h2>
+    <div id="body"> Vi bruker HTML til å definere et dokument.
         <ul>
             <li>Tagger for grunnleggende oppsett av en HTML-fil</li>
             <li>Tagger for grunnleggende formatering av tekst</li>
@@ -66,9 +50,9 @@
         </ul>
     </div>
 
-    <h2 style="background-color: red;"> CSS </h2>
+    <h2 id="h2" style="background-color: red;"> CSS </h2>
 
-    <div> Vi bruker CSS til å <i>style</i> et dokument, altså <b> farger, fonter, utseende </b> og </b>lignende.</b>
+    <div id="body"> Vi bruker CSS til å <i>style</i> et dokument, altså <b> farger, fonter, utseende </b> og </b>lignende.</b>
         <ul>
             <li><tt>background-color</tt></li>
             <li><tt>color</tt></li>
@@ -86,9 +70,9 @@
         </ul>
     </div>
 
-    <h2 style="background-color: darkorange;">JavaScript</h2> 
+    <h2 id="h2" style="background-color: darkorange;">JavaScript</h2> 
 
-        <div>
+        <div id="body">
         Det viktigste vi skal lære er programmeringsspråket JavaScript. Vi skal lære grunnleggende programmering
         ved å manipulere HTML- og CSS-kode på en nettside ved hjelp av JavaScript.
         <ul>
@@ -99,22 +83,24 @@
         </ul>
     </div>
 
-    <h2 style="background-color: black;"> Hode, kropp og ben </h2> 
+    <h2 id="h2" style="background-color: black;"> Hode, kropp og ben </h2> 
+    <div id="body">
         <div> 
             <button>◀</button>
-            <img src="Emne1/Oppgaver/1.0/img/head1.png">
+            <img src="img/head1.png">
             <button>▶</button>
         </div>
         <div> 
             <button>◀</button>
-            <img src="Emne1/Oppgaver/1.0/img/body1.png">
+            <img src="img/body1.png">
             <button>▶</button>
         </div>
         <div> 
             <button>◀</button>
-            <img src="Emne1/Oppgaver/1.0/img/legs1.png">
+            <img src="img/legs1.png">
             <button>▶</button>
         </div>
+    </div>
 
 </body>
 </html>
