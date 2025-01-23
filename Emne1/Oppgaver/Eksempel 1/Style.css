@@ -6,7 +6,7 @@
     margin: 20px;
     text-align: center;
 }
-#body{
+#txt{
     background-color: lightblue;
     padding:10px;
     color: black;
@@ -14,4 +14,16 @@
     border:solid 1px black;
     margin: 20px;
     text-align: justify;
+}
+#box{
+    background-color: lightgrey;
+    padding:10px;
+    color: black;
+    width: 500px;
+    border:solid 1px black;
+    text-align: justify;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+
 }
