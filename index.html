@@ -7,48 +7,54 @@
     <style>
         .h1 {
             background-color: lightblue;
-            padding:10px;
             color: blue;
-            width: 200px;
-            border:solid 1px black;
-            margin: 20px;
             font-family: fantasy;
-            text-align: center;
-            align-items: center;
-        }
-        .h2 {
-            background-color: yellow;
+            font:bold;
+
             padding:10px;
-            color: red;
             width: fit-content;
             border:solid 1px black;
             margin: 20px;
+            text-align: center;
+            align-items: center;
+            text-shadow: 2px 3px 5px grey;
+        }
+        .h2 {
+            background-color: yellow;
+            color: red;
             font-family: cursive;
             font:italic;
+
+            padding:10px;
+            width: fit-content;
+            border:solid 1px black;
+            margin: 20px;
             text-align: center;
+            align-items: center;
             text-shadow: 2px 3px 5px grey;
-            align-items:center;
         }
-        .button{
+        .buttons{
             align-items: center;
         }
     
     </style>
 </head>
 <body>
-    <h1 id="h1" class="h1"> HELLO </h1>
-    <h2 id="h2" class="h2"> Welcome</h2>
-    <div>
-        <div id="newDiv"> 
+    <div id="headings">
+        <h1 id="h1" class="h1"> HELLO </h1>
+        <h2 id="h2" class="h2"> Welcome here </h2>
+    </div>
+    <div id="buttons">
+        <div id="button1"> 
+            <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Repository</a>
             <button onclick="updateText()"> Check this out</button>
+
         </div>
-        <button>
-            <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Click here</a>
-        </button>
     </div>
     <script>
         function updateText(){
-            document.getElementById('h2').innerHTML = "Click on the link to go to my repository";
+            document.getElementById('h2').innerHTML = "Click on the link to go to my repository"; 
+
         }
     </script>
 </body>
