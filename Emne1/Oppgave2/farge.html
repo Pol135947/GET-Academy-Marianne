@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html id="page" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.2</title>
+</head>
+<body>
+    <p> May the fifth be with you</p>
+    <button id="idk" onclick="changeBackground()">Change</button>
+    <div class="colors"> 
+        <button onclick="changeBackgroundTo(this)">Blue</button>
+        <button onclick="changeBackgroundTo(this)">purple</button>
+        <button onclick="changeBackgroundTo(this)">grey</button>
+    </div>
+
+    <script>
+        function changeBackground(){
+            document.getElementById('page').style.backgroundColor = 'lightblue'; 
+        }
+        function changeBackgroundTo(button){
+            let color = button.innerHTML.toLowerCase();
+            document.getElementById('page').style.backgroundColor = color;
+
+        }
+        toString
+    </script>
+</body>
+</html>

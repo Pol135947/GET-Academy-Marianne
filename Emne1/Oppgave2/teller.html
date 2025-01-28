@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teller</title>
+    <style>
+        .game{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game">
+        <button onclick="removeOne()">-</button>
+        <div id="number">0</div>
+        <button onclick="addOne()">+</button>
+    </div>
+
+    <script>
+        let number = 0;
+        function removeOne(){
+            document.getElementById('number').innerHTML = number--;
+        }
+        function addOne(){
+            document.getElementById('number').innerHTML = number++;
+        }
+    </script>
+</body>
+</html>
