@@ -6,33 +6,82 @@
     <title>Inventory</title>
     <style>
         .cells{
-            border: 10px solid gray;
-            padding: 30px;
-            border-radius: 50%;
-            width: 300px;
-            background-color: black;
-            font-size: 300%;
-            font-family: Arial, Helvetica, sans-serif;
-            display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
+            width: 50px;
+            height: 50px;
+            display: flex;
             align-items: center;
-            justify-items: center;
-            color: white;
+            justify-content: center;
+            border: 1px solid #000;
+        }
+        .inventory, .hiddenInventory, .armorInventory{
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .inventory{
+            grid-template-columns: repeat(8, 50px);
+        }
+        .hiddenInventory{
+            grid-template-columns: repeat(8,50px);
+            grid-template-rows: repeat(3,50px)
+        }
+        .armorInventory{
+            grid-template-columns: 50px;
+            grid-template-rows: repeat(5, 50px);           ;
         }
     </style>
 </head>
 <body>
-    <div class="cells">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-
-    </div>    
+    <div class="armorInventory"> 
+        <div class="cells">Helmet</div>
+        <div class="cells">Body</div>
+        <div class="cells">Legs</div>
+        <div class="cells">Boots</div>
+        <div class="cells">Shield</div>
+    </div>
+    <div class="hiddenInventory">
+        <div class="cells">9</div>
+        <div class="cells">10</div>
+        <div class="cells">11</div>
+        <div class="cells">12</div>
+        <div class="cells">13</div>
+        <div class="cells">14</div>
+        <div class="cells">15</div>
+        <div class="cells">16</div>
+        <div class="cells">17</div>
+        <div class="cells">18</div>
+        <div class="cells">19</div>
+        <div class="cells">20</div>
+        <div class="cells">21</div>
+        <div class="cells">22</div>
+        <div class="cells">23</div>
+        <div class="cells">24</div>
+        <div class="cells">25</div>
+        <div class="cells">26</div>
+        <div class="cells">27</div>
+        <div class="cells">28</div>
+        <div class="cells">29</div>
+        <div class="cells">30</div>
+        <div class="cells">31</div>
+        <div class="cells">32</div>
+    </div>
+    <div class="inventory">
+        <div class="cells">1</div>
+        <div class="cells">2</div>
+        <div class="cells">3</div>
+        <div class="cells">4</div>
+        <div class="cells">5</div>
+        <div class="cells">6</div>
+        <div class="cells">7</div>
+        <div class="cells">8</div> 
+    </div>
+    <script>
+        // function showInventory() {
+        //     document.getElementById('inventory').innerHTML += /*HTML*/`        
+               
+        //     `;
+        // }
+    </script>
 </body>
 </html>
 
