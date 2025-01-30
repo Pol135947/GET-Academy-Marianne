@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Guess the number</title>
+    <style>
+        body, button, #inputfield{
+            font-family:'Alegreya', serif;
+            font-size: 16px;
+        }
+        body{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div>
+            <div id="scorecount">score = 0</div>
+            <div id="photo"> <img href=""></div>
+            <div class="game">
+                <div id="number1">1</div>
+                <div id="numberGuess"><input type="number" id="inputfield" min="0" max="10"></div>
+                <div id="number2">10</div>
+                <button onclick="reset()">Reset</button>
+                <button onclick="guessTheNumber()">Submit</button>
+            </div>
+            <div id="message"></div>
+        </div>
+
+    </div>
+
+    <script>
+        let realNumber = Math.floor(Math.random()*10)+1;
+        let score = 0 
+
+        function guessTheNumber(){
+            let guessedNumber = parseInt(document.getElementById('inputfield').value);
+            let message = document.getElementById('message');
+
+            if (isNaN(guessedNumber) || guessedNumber < 1 || guessedNumber > 10) {
+                message.innerHTML = "Please enter a number between 1 and 10.";
+                return;
+            }
+            if (guessedNumber === realNumber) {
+                score++;
+                document.getElementById('scorecount').innerText = `Score = ${score}`;
+                message.innerHTML = "Correct! The number has been reset.";
+                realNumber = Math.floor(Math.random() * 10) + 1;
+                document.getElementById('number1').innerText = "1";
+                document.getElementById('number2').innerText = "10";
+            } else if (guessedNumber < realNumber) {
+                document.getElementById('number1').innerText = guessedNumber;
+                message.innerHTML = "Too low!";
+            } else {
+                document.getElementById('number2').innerText = guessedNumber;
+                message.innerHTML = "Too high!";
+            }
+        }
+        function reset() {
+            realNumber = Math.floor(Math.random() * 10) + 1;
+            score = 0;
+            document.getElementById('scorecount').innerText = "Score = 0";
+            document.getElementById('number1').innerText = "1";
+            document.getElementById('number2').innerText = "10";
+            document.getElementById('inputfield').value = "";
+            document.getElementById('message').innerText = "";
+        }
+    </script>
+    
+</body>
+</html>

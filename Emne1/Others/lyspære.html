@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightswitch</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+    </style>
+</head>
+<body id="backgLight">
+    <div class="content">
+        <button onclick="switchLight()">on/off</button>
+        <div id="description"> The light is off</div>
+    </div>
+
+    <script>
+        let light = false
+        function switchLight(){
+            if (light){
+                document.getElementById('backgLight').style.backgroundColor = 'yellow';
+                document.getElementById('description').innerHTML = "The light in on"
+
+                light = false
+            }
+            else{
+                document.getElementById('backgLight').style.backgroundColor = 'grey';
+                document.getElementById('description').innerHTML = "The light in off"
+                light = true
+            }
+        }
+    </script>
+</body>
+</html>
