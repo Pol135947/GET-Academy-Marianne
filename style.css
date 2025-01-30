@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Cursif';
     src: url('Cursif.woff2') format('woff2'),
@@ -7,38 +8,35 @@
     font-display: swap;
 }
 
-h1 {
-    background-color: lightblue;
-    color: blue;
-    font-family:'Trebuchet MS', sans-serif;
-    font:bold;
-    width: fit-content;
-
-    padding:10px;
-    border:solid 1px black;
-    margin: 20px;
+h1, h2{
+    background-color: crimson;
+    border:double 5px black;
     text-align: center;
     align-items: center;
-    text-shadow: 2px 3px 5px grey;
+    text-shadow:5px 10px 10px black;
+    width: 400px;
+    height: fit-content;
+
+}
+body{
+    background-color: aqua;
+}
+h1 {
+    color: white;
+    font-family:'Alegreya', sans-serif;
+    font-size:50px;
 }
 h2 {
-    background-color: yellow;
-    color: red;
+    color: white;
     font-family: 'Cursif', sans-serif;
-    font:italic;
-
-    padding:10px;
-    width: fit-content;
-    border:solid 1px black;
-    margin: 20px;
-    text-align: center;
-    align-items: center;
-    text-shadow: 2px 3px 5px grey;
+    font-size:20px;
 }
 button{
+    font-family:'Alegreya', sans-serif;
     align-items: center;
     margin: 5px;
 }
 #content{
-    font-family: 'Cursif';
+    font-family: 'Cursif', monospace;
+    font-size: 12px;
 }
