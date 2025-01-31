@@ -2,10 +2,8 @@
         function showText(){ 
             let age = getAge();
             document.getElementById('content').innerHTML = /*HTML*/`
-            <button onclick="newLayout('lightblue','purple', 'Tadaa')"> Show everything </button>
-            <div>
-                <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Repository </a>
-                <div class="content"> About me : </div>
+            <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Repository </a> <br>
+            <div id='intro'>
                 <div id="myAge"> My name is Marianne Mahieu. I'm ${age} years of age. </div> 
                 <ul>
                     <li>
@@ -15,24 +13,36 @@
                             <li>Genshin Impact</li>
                             <li>Cats</li>
                             <li>Researching whatever catches my fancy</li>
+                            <li>Greek mythology</li>
                         </ul>
                     </li>
                 </ul>        
             </div>
             `;
         }
-        
-        let yearOfBirth =  new Date("2004-08-23").getFullYear();
-        function getAge(){
-                let todaysDate = new Date(); //innebygd javascript funksjon som henter datens dato
-                let year = todaysDate.getFullYear(); //henter ut årstall fra dagens dato
-                let age = year - yearOfBirth;
-                return age;
-        }
-        function newLayout(color1, color2, text){
-            document.getElementById('content').style.background = color1;
-            document.getElementById('content').style.color = color2;
-            document.getElementById('h2').innerHTML = text;
 
+        let yearOfBirth = new Date("2004-08-23").getFullYear();
+        let monthOfBirth = new Date("2004-08-23").getMonth();
+        let dayOfBirth = new Date("2004-08-23").getDate();
+        function getAge() {
+            let todaysDate = new Date();
+            let year = todaysDate.getFullYear();
+            let month = todaysDate.getMonth();
+            let day = todaysDate.getDate();
+            
+            let age = year - yearOfBirth;
+
+            // Adjust age if birthday has not occurred yet in the current year
+            if (month < monthOfBirth || (month === monthOfBirth && day < dayOfBirth)) {
+                age--;
+            }
+            return age;
         }
-    
+        
+        function newLayout(borderColor, textColor){
+            const content = document.getElementById('content');
+            content.classList.add(".newLayout");
+            document.getElementById('h2').style.backgroundColor = "transparent";
+            document.getElementById('h2').innerHTML = /*HTML*/`
+            Roses are <span class="red"> red, </span> violets are <span class="blue"> blue</span>...`;
+        }

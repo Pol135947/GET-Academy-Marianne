@@ -8,13 +8,13 @@
     font-display: swap;
 }
 
-h1, h2{
+h1, h2 {
     background-color: crimson;
     border:double 5px black;
     text-align: center;
     align-items: center;
     text-shadow:5px 10px 10px black;
-    width: 400px;
+    width:page;
     height: fit-content;
 
 }
@@ -36,7 +36,27 @@ button{
     align-items: center;
     margin: 5px;
 }
+.pageContent{
+    font-family:'Alegreya', sans-serif;
+    font-size: 16px;
+    margin:5px;
+}
 #content{
-    font-family: 'Cursif', monospace;
-    font-size: 12px;
+    font-family: 'Alegreya', monospace;
+    font-size: 16px;
+}
+.red{
+    color: red;
+    text-shadow:5px 10px 10px red;
+}
+.blue{
+    color: blue;
+    text-shadow:5px 10px 10px blue;
+}
+.newLayout{
+    font-family: 'Cursif', sans-serif;
+    text-decoration-color: black;
+    background-color: transparent;
+    color: white;
+    text-rendering: optimizeSpeed;
 }
