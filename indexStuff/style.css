@@ -21,6 +21,9 @@ h1, h2 {
 body{
     background-color: aqua;
 }
+u {
+    text-decoration: none;
+}
 h1 {
     color: white;
     font-family:'Alegreya', sans-serif;
@@ -42,21 +45,23 @@ button{
     margin:5px;
 }
 #content{
-    font-family: 'Alegreya', monospace;
+    font-family: 'Alegreya', sans-serif;
     font-size: 16px;
 }
 .red{
     color: red;
-    text-shadow:5px 10px 10px red;
+    text-shadow:5px 10px 10px darkred;
 }
 .blue{
     color: blue;
-    text-shadow:5px 10px 10px blue;
+    text-shadow:5px 10px 10px darkblue;
 }
 .newLayout{
-    font-family: 'Cursif', sans-serif;
-    text-decoration-color: black;
-    background-color: transparent;
-    color: white;
-    text-rendering: optimizeSpeed;
+    color: blue;
+}
+img{
+    display: none;
+    width: auto;
+    height: 100px;
+    margin-top: 20px;
 }

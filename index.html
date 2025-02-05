@@ -6,9 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Greetings</title>
+    <link rel="stylesheet" href="indexStuff/style.css">
+    <title>INTRO PAGE</title>
 
 </head>
 <body>
@@ -17,9 +16,12 @@
         <h2 id="h2"> Welcome here </h2>
         <div>
             <div onclick="showText()"> About me : </div>
-            <div id="content" onclick="newLayout('mediumturquoise','black')"></div>
-        </div> 
+            <!-- <input id="cursor" onchange="functionName()" type="range" min="1" step="1" max="100"> <br> -->
+            <div id="content"></div>
+        </div>
+        <div id="game" onclick="startGame()">Start Game !</div>
+        <script src="indexStuff/gameScript.js"></script>
     </div>
-   
+    <script src="indexStuff/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>story</title>
+    <style>
+        body{
+            font-family: 'Alegreya', sans-serif;
+        }
+        .group{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 2px;
+        }
+        .words{
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+        }
+        button{
+            background-color: transparent;
+            margin: 2px;
+            padding: left;
+            box-sizing: 30px, 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        let verb1 = "change";
+        let noun1 = "mind";
+        let verb2 = "change";
+        let noun2 = "life";
+
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="group">
+                    <div>If you can</div>
+                    <div class="word" id="verb1">${verb1}</div>
+                    <div>your</div>
+                    <div class="word" id="noun1">${noun1},</div>
+                    <div>you can</div>
+                    <div class="word" id="verb2">${verb2}</div>
+                    <div>your</div>
+                    <div class="word" id="noun2">${noun2}</div>
+                </div>
+
+                <div class="words">
+                    <button data-type="verb1" onclick="changeField(this)">run</button>
+                    <button data-type="verb1" onclick="changeField(this)">hate</button>
+                    <button data-type="noun1" onclick="changeField(this)">mouth</button>
+                    <button data-type="noun1" onclick="changeField(this)">dog</button>
+                    <button data-type="verb2" onclick="changeField(this)">shut</button>
+                    <button data-type="verb2" onclick="changeField(this)">love</button>
+                    <button data-type="noun2" onclick="changeField(this)">mouth</button>
+                    <button data-type="noun2" onclick="changeField(this)">cat</button>
+                </div>`;
+        }
+
+        function changeField(button) {
+            let type = button.getAttribute("data-type");
+            let chosenWord = button.innerHTML;
+
+            if (type === "verb1") {
+                verb1 = chosenWord;
+            } else if (type === "noun1") {
+                noun1 = chosenWord;
+            } else if (type === "verb2") {
+                verb2 = chosenWord;
+            } else if (type === "noun2") {
+                noun2 = chosenWord;
+            }
+
+            updateView(); // Re-render the UI with the updated words
+        }
+
+        updateView();
+    </script>
+</body>
+</html>
