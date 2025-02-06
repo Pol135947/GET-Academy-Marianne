@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="numbers" onclick="loop()"> numbers </div>
+    <script>
+        function loop(){
+            let number1 = 0
+            let number2 = 1
+            while (number1 !== number2){
+                number1 = Math.floor(Math.random() * 10) + 1;
+                number2 = Math.floor(Math.random() * 10) + 1;
+            }
+            document.getElementById('numbers').innerHTML = `the numbers are ${number1} and ${number2}`
+        }
+    </script>
+</body>
+</html>

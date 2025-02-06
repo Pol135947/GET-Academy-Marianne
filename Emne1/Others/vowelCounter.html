@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Counter & Word Reverser</title>
+</head>
+<body>
+
+    <input id="word" type="text" oninput="processWord()"> 
+    <div>Vowels Found: <span id="showVowels">0</span></div>
+    <div>List of Vowels: <span id="vowelsList"></span></div>
+    <div>Reversed Word: <span id="reversed"></span></div>
+
+    <script>
+        function vowelCounter(word) {
+            const vowelsList = ['a', 'e', 'i', 'o', 'u', 'y', 'æ', 'ø', 'å'];
+            let vowelCount = 0;
+            let foundVowels = [];
+
+            for (let letter of word) {
+                if (vowelsList.includes(letter)) {
+                    vowelCount++;
+                    foundVowels.push(letter);
+                }
+            }
+
+            document.getElementById("vowelsList").innerHTML = foundVowels.join(', ');
+            document.getElementById("showVowels").innerHTML = vowelCount;
+        }
+
+        function wordReverse(word) {
+            let reversedWord = word.split("").reverse().join("");
+            document.getElementById("reversed").innerHTML = reversedWord;
+        }
+
+        function processWord() {
+            let word = document.getElementById("word").value.toLowerCase();
+            vowelCounter(word);
+            wordReverse(word);
+        }
+    </script>
+
+</body>
+</html>

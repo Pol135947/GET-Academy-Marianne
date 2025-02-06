@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery list</title>
+</head>
+<body>
+
+    <input id="groceries" type="text" onchange="addToCart()">
+    <p id="groceryList"></p>
+    
+    
+    <script>
+        let groceryList = new Array;
+        function addToCart(){
+            let grocery = document.getElementById("groceries").value;
+            groceryList.push(grocery)
+            document.getElementById("groceryList").innerHTML = `Your grocery list: ${groceryList}`;
+            resetField()
+        }
+        function resetField(){
+            document.getElementById("groceryList").value = "";
+        }
+
+    </script>
+</body>
+</html>
