@@ -7,10 +7,10 @@
 |`def function():`|`function name(){}`|
 |`.append()`|`.push()`|
 ||`.join()`|
-|`for letter in word:` <br> <ul>`if letter in vowelsList:`| `for (let letter of word) {` <br> <ul>` if vowelsList.includes(letter){`<br>`}`<br>`}`|
+|`for letter in word:` <br> <ul>`if letter in vowelsList:`| `for (let letter of word) {` <br> <ul>`if vowelsList.includes(letter){`<br>`}`<br>`}`|
 |`.lower()`|`.toLowerCase()`|
 |`for i in range (start, stop):`|`for (let i = start; i < end; i++){`<br>`}`|
-|`name =`|`let, var, const name = `|
+|`name =`|`let, var, const name =`|
 |`if condition:` <ul> `event`| `if (condition){`<ul>`event;}`|
 |`elif condition:` <ul> `event`| `if else (condition){`<ul>`event;}`|
 |`else:` <ul> `condition`| `else {condition}`|

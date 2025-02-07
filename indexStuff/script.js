@@ -1,12 +1,14 @@
-       
-function showText(){ 
+function showPage(){ 
     let age = getAge();
-    document.getElementById('content').innerHTML = /*HTML*/`
+    document.getElementById('app').innerHTML = /*HTML*/`
+    <h1 id="h1"> HELLO </h1>
+    <h2 id="h2"> Welcome here </h2>
+    <div> About me : </div>
     <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Repository </a> <br>
-    <div id='intro' onclick="newLayout()">
+    <div onclick="newLayout()">
         <div id="myAge"> My name is Marianne Mahieu. I'm ${age} years of age. </div> 
         <u>
-            <li> Here are a couple of my hobbies outside of programming ;
+            <div id='intro'> Here are a couple of my hobbies outside of programming ; <br>
                 <img src="indexStuff/img/piano.webp">
                 <li onmouseover=showImage(this)>Piano</li>
                 <img src="indexStuff/img/Genshin_Impact.jpg">
@@ -17,10 +19,10 @@ function showText(){
                 <li onmouseover=showImage(this)>Researching whatever catches my fancy</li>
                 <img src="indexStuff/img/GreekRoman.jpg">
                 <li onmouseover=showImage(this)>Greek/Roman mythology</li>
-            </li>
+            </div>
         </u>  
-        <p> 
-        </p>      
+        <div id="game" onclick="startGame()"> Start Game ! </div>
+        <script src="indexStuff/gameScript.js"></script>    
     </div>
     `;
 }
@@ -44,9 +46,9 @@ function getAge() {
 }
 
 function newLayout(){
-    var content = document.getElementById('content');
+    var content = document.getElementById('intro');
     content.className = "newLayout";
-    document.getElementById('h2').style.backgroundColor = "color-mix(in srgb, red 75%, black 25%)";
+    document.getElementById('h2').style.backgroundColor = "color-mix(in srgb, red 60%, blue 40%)";
     document.getElementById('h2').innerHTML = /*HTML*/`
     Roses are <span class="red"> red, </span> violets are <span class="blue"> blue</span>...`;
 }

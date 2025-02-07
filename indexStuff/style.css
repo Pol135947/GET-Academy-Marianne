@@ -34,30 +34,27 @@ h2 {
     font-family: 'Cursif', sans-serif;
     font-size:20px;
 }
-button{
-    font-family:'Alegreya', sans-serif;
-    align-items: center;
-    margin: 5px;
-}
-.pageContent{
+#app{
     font-family:'Alegreya', sans-serif;
     font-size: 16px;
     margin:5px;
 }
-#content{
-    font-family: 'Alegreya', sans-serif;
-    font-size: 16px;
+#game{
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
 }
 .red{
     color: red;
-    text-shadow:5px 10px 10px darkred;
+    text-shadow:5px 10px 10px color-mix(in srgb, red 25%, black 75%);
 }
 .blue{
     color: blue;
     text-shadow:5px 10px 10px darkblue;
 }
 .newLayout{
-    color: blue;
+    overflow: hidden;
+    color:olive;
 }
 img{
     display: none;
