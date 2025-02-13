@@ -20,6 +20,7 @@ h1, h2 {
 }
 body{
     background-color: aqua;
+    font-family:'Alegreya', sans-serif;
 }
 u {
     text-decoration: none;
@@ -53,9 +54,9 @@ h2 {
     text-shadow:5px 10px 10px darkblue;
 }
 .newLayout{
-    overflow: hidden;
-    color:olive;
+    flex-wrap: wrap-reverse;
 }
+
 img{
     display: none;
     width: auto;

@@ -1,19 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        /* General keyboard layout */
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: max-content;
+        }
+
+        /* Row styling */
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* General key styles */
+        .key {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: 'Alegreya', sans-serif;
+            color: white;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 5px;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.1s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Special keys */
+        .esc { width: 75px; }
+        .backspace { width: 90px; }
+        .tab { width: 70px; }
+        .caps { width: 80px; }
+        .enter { width: 70px; }
+        .shift { width: 90px; }
+        .space { width: 255px; height: 45px; }
+
+        /* Key hover effect */
+        .key:hover {
+            background: #444;
+        }
+
+        /* Key press effect */
+        .key:active, .key.active {
+            background: #666;
+            transform: translateY(2px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mole key */
+        .key.mole {
+            background: brown;
+            color: white;
+        }
+
+        /* Responsive behavior */
+        @media (max-width: 768px) {
+            .key {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
+            .space { width: 250px; }
+        }
+    </style>
 </head>
 <body>
-    <input id="word" type="text" oninput="love()">
-    <div id="idk"></div>
+    <div id="score">Score: 0</div>
+    <div class="keyboard">
+        <div class="row">
+            <div class="key" data-key="'" data-code="IntlBackslash">'</div>
+            <div class="key" data-key="1" data-code="Digit1">1</div>
+            <div class="key" data-key="2" data-code="Digit2">2</div>
+            <div class="key" data-key="3" data-code="Digit3">3</div>
+            <div class="key" data-key="4" data-code="Digit4">4</div>
+            <div class="key" data-key="5" data-code="Digit5">5</div>
+            <div class="key" data-key="6" data-code="Digit6">6</div>
+            <div class="key" data-key="7" data-code="Digit7">7</div>
+            <div class="key" data-key="8" data-code="Digit8">8</div>
+            <div class="key" data-key="9" data-code="Digit9">9</div>
+            <div class="key" data-key="0" data-code="Digit0">0</div>
+            <div class="key" data-key="+" data-code="Minus">+</div>
+            <div class="key" data-key="Dead" data-code="Equal">´</div>
+            <div class="key backspace" data-key="Backspace" data-code="Backspace">Backspace</div>
+        </div>
 
+        <div class="row">
+            <div class="key tab" data-key="Tab" data-code="Tab">TAB</div>
+            <div class="key" data-key="Q" data-code="KeyQ">Q</div>
+            <div class="key" data-key="W" data-code="KeyW">W</div>
+            <div class="key" data-key="E" data-code="KeyE">E</div>
+            <div class="key" data-key="R" data-code="KeyR">R</div>
+            <div class="key" data-key="T" data-code="KeyT">T</div>
+            <div class="key" data-key="Y" data-code="KeyY">Y</div>
+            <div class="key" data-key="U" data-code="KeyU">U</div>
+            <div class="key" data-key="I" data-code="KeyI">I</div>
+            <div class="key" data-key="O" data-code="KeyO">O</div>
+            <div class="key" data-key="P" data-code="KeyP">P</div>
+            <div class="key" data-key="Å" data-code="BracketLeft">Å</div>
+            <div class="key" data-key="Dead" data-code="BracketRight">¨</div>
+            <div class="key enter" data-key="Enter" data-code="Enter">Enter</div>
+        </div>
+
+        <div class="row">
+            <div class="key caps" data-key="CapsLock" data-code="CapsLock">CAPS</div>
+            <div class="key" data-key="A" data-code="KeyA">A</div>
+            <div class="key" data-key="S" data-code="KeyS">S</div>
+            <div class="key" data-key="D" data-code="KeyD">D</div>
+            <div class="key" data-key="F" data-code="KeyF">F</div>
+            <div class="key" data-key="G" data-code="KeyG">G</div>
+            <div class="key" data-key="H" data-code="KeyH">H</div>
+            <div class="key" data-key="J" data-code="KeyJ">J</div>
+            <div class="key" data-key="K" data-code="KeyK">K</div>
+            <div class="key" data-key="L" data-code="KeyL">L</div>
+            <div class="key" data-key="" data-code="Semicolon">Ø</div>
+            <div class="key" data-key="Å" data-code="Quote">Æ</div>
+            <div class="key" data-key="@" data-code="Backslash">@</div>
+        </div>
+
+        <div class="row">
+            <div class="key shift" data-key="Shift" data-code="ShiftLeft">Shift</div>
+            <div class="key" data-key="Z" data-code="KeyZ">Z</div>
+            <div class="key" data-key="X" data-code="KeyX">X</div>
+            <div class="key" data-key="C" data-code="KeyC">C</div>
+            <div class="key" data-key="V" data-code="KeyV">V</div>
+            <div class="key" data-key="B" data-code="KeyB">B</div>
+            <div class="key" data-key="N" data-code="KeyN">N</div>
+            <div class="key" data-key="M" data-code="KeyM">M</div>
+            <div class="key" data-key="," data-code="Comma">,</div>
+            <div class="key" data-key="." data-code="Period">.</div>
+            <div class="key" data-key="-" data-code="Slash">-</div>
+            <div class="key shift" data-key="Shift" data-code="ShiftRight">Shift</div>
+        </div>
+
+        <div class="row">
+            <div class="key space" data-key=" " data-code="Space">Space</div>
+        </div>
+    </div>
     <script>
-        function love(){
-            let text = document.getElementById("word").value;
-            document.getElementById("idk").innerHTML = `your text:${text}`
+
+document.addEventListener("DOMContentLoaded", function () {
+    const keys = document.querySelectorAll(".key");
+    const keyMap = {};
+    const codeMap = {};
+    const immediateReleaseKeys = ["CapsLock", "Tab", "ShiftLeft", "ShiftRight"];
+    let score = 0;
+    let molePosition;
+    let moleTimeout;
+    let gameTimer;
+    let level = 1;
+    const gameDuration = 120000; // 2 minutes in milliseconds
+    let moleTimeLimit = 10000; // Initial mole time limit for level 1
+
+    // Create mappings between key values, key codes, and elements
+    keys.forEach((key) => {
+        if (key.dataset.key) {
+            keyMap[key.dataset.key.toUpperCase()] = key;
         }
+        if (key.dataset.code) {
+            codeMap[key.dataset.code] = key;
+        }
+    });
+
+    // Function to place a mole randomly
+    function placeMole() {
+        if (molePosition) {
+            molePosition.classList.remove("mole");
+        }
+        const randomIndex = Math.floor(Math.random() * keys.length);
+        molePosition = keys[randomIndex];
+        molePosition.classList.add("mole");
+
+        // Set timeout to remove the mole if not clicked in time
+        moleTimeout = setTimeout(() => {
+            score = Math.max(0, score - 1); // Deduct a point but not below zero
+            document.getElementById("score").textContent = `Score: ${score}`;
+            placeMole();
+        }, moleTimeLimit);
+    }
+
+    // Handle keydown event
+    document.addEventListener("keydown", function (event) {
+        const key = event.key.toUpperCase();
+        const code = event.code;
+
+        if (immediateReleaseKeys.includes(code)) {
+            event.preventDefault();
+        }
+
+        if (codeMap[code]) {
+            codeMap[code].classList.add("active");
+        } else if (keyMap[key]) {
+            keyMap[key].classList.add("active");
+        }
+
+        if (immediateReleaseKeys.includes(code)) {
+            setTimeout(() => {
+                if (codeMap[code]) {
+                    codeMap[code].classList.remove("active");
+                } else if (keyMap[key]) {
+                    keyMap[key].classList.remove("active");
+                }
+            }, 100);
+        }
+
+        // Check if the mole is whacked
+        if (molePosition && (molePosition === codeMap[code] || molePosition === keyMap[key])) {
+            score++;
+            document.getElementById("score").textContent = `Score: ${score}`;
+            clearTimeout(moleTimeout); // Reset timeout since the mole was hit
+            placeMole();
+
+            // Increase difficulty level every 10 points
+            if (score % 10 === 0) {
+                level++;
+                moleTimeLimit = Math.max(1000, 5000 - level * 500); // Reduce mole time limit but not below 1 second
+            }
+        }
+    });
+
+    // Handle keyup event
+    document.addEventListener("keyup", function (event) {
+        const key = event.key.toUpperCase();
+        const code = event.code;
+
+        if (!immediateReleaseKeys.includes(code)) {
+            if (codeMap[code]) {
+                codeMap[code].classList.remove("active");
+            } else if (keyMap[key]) {
+                keyMap[key].classList.remove("active");
+            }
+        }
+    });
+
+    // Start the game
+    function startGame() {
+        score = 0;
+        level = 1;
+        moleTimeLimit = 5000;
+        document.getElementById("score").textContent = `Score: ${score}`;
+        placeMole();
+
+        // Set game timer
+        gameTimer = setTimeout(() => {
+            alert(`Game Over! Final Score: ${score}`);
+            clearTimeout(moleTimeout);
+        }, gameDuration);
+    }
+
+    startGame();
+});
+
+
     </script>
 </body>
 </html>

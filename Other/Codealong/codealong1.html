@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codealong</title>
+</head>
+<body onload="updateView()">
+    
+    <!--       <ul>
+                    <li>Programmet skal ta input fra brukeren (hvor gammel han/hun er)</li> -V 
+                    <li>Lag en variabel som bestemmer aldersgrensen på nattklubben.</li>  -V
+                    <li>Lag logikk som sjekker om brukeren er gammel nok til å komme inn - 
+                        vis om brukeren kan komme inn eller ikke som tekst på nettsiden OG i konsollen :D</li>
+                    <li>Løs oppgaven ved å følge MVC patternet/prinsippet</li>
+                </ul> -->
+    <input id="inputField" type="number" onchange="checkAge()">
+    <div id="app"></div>
+    <script>
+        // Model
+        const minAge = 18;
+        let userAge = document.getElementById('inputField');
+        let message = "";
+
+        // Controller
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+            ${message}
+            `;
+        }
+        
+        function checkAge(){
+            let ageAsNumber = parseInt(userAge.value);
+            console.log("this is age: ", ageAsNumber, "datatype:", typeof(ageAsNumber))
+            if (ageAsNumber >= minAge){
+                console.log("kom inn")
+                message = "YES kom inn !"
+            }
+            else{
+                console.log("for ung")
+                message = "NOPE"
+            }
+        }
+    </script>
+</body>
+</html>

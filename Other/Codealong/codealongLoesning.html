@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nattklubb</title>
+</head>
+<body>
+    <input id="ageInput" type="number" oninput="ageIsOk(this.value)"/>
+    <div id="app"></div>
+
+    <script>
+        const app = document.getElementById('app');
+        let lowerAgeLimit = 23;
+        let upperAgeLimit = 70;
+        let ageOk = false; 
+        let userWallet = 50;
+        let nightClubEntryFee = 90;
+        let canGetInFree = false;
+        let textToShow = "";
+
+        showHTML();
+        function showHTML(){
+            let html = ``;
+            html = `
+            <button onclick="checkIfYouCanEnterDaClub()">Spør om å komme inn</button>
+        ${textToShow}
+            `; 
+            app.innerHTML = html;
+        }
+
+        function checkIfYouCanEnterDaClub(){
+            let moneyCanBepaid = checkIfEnoughMoney();
+            let freebie = canGetInForFree();
+
+            if(ageOk && moneyCanBepaid){
+                textToShow = ` You are at a good age and have enough money, come on in!`
+                showHTML();
+            }
+            else if(ageOk && !moneyCanBepaid && freebie){
+                textToShow = `You are at a good age, but don't have enough money. Aah, ok - come on in. Youre VERY lucky today.`;
+                showHTML();
+            }
+            else if(ageOk && !moneyCanBepaid && !freebie){
+                textToShow = `You are at a good age, but dont have enough money. SCRAM KIDDO!`;
+                showHTML();
+            }
+            else if(!ageOk){
+                textToShow = `Leave. Bad age.`;
+                showHTML();
+            }
+            else {
+                console.log("something went wrong => ",error)
+            }
+        }
+
+        function ageIsOk(ageFromInput){
+            console.log(ageFromInput, "<= what is this?  type: ", typeof(ageFromInput)) //feilsøking: hva kommer fra input, hvilken datatype har det? STRING ja.ahaa
+            let ageAsNumber = parseInt(ageFromInput); //kommer som string, selv fra number input #JS suukkk...
+
+            if(ageAsNumber >= 23 || ageAsNumber <= 70){
+                ageOk = true; 
+            }
+            else {
+                ageOk = false;
+            }
+
+        }
+
+        function checkIfEnoughMoney(){
+            let hasEnoughMoney = false;
+            if(userWallet >= nightClubEntryFee){
+                hasEnoughMoney = true;
+            }
+            return hasEnoughMoney;
+        }
+
+        function canGetInForFree(){
+            let gettingInForFree = false;
+            let randomChance = Math.floor(Math.random() * 2) //få enten 0 eller 1 -- 50/50 sjanse
+            if(randomChance === 1){
+                console.log("getting in for free! Woo!")
+                gettingInForFree = true;
+            } else {
+                gettingInForFree = false;
+            }
+            return gettingInForFree;
+        }
+
+
+
+
+    </script>
+</body>
+</html>

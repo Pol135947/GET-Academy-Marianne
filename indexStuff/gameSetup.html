@@ -1,95 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-<head>
-        <style>
-        /* General keyboard layout */
-        .keyboard {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            width: max-content;
-        }
-
-        /* Row styling */
-        .row {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        /* General key styles */
-        .key {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-            font-family:'Alegreya', sans-serif;
-            color: white;
-            background: #333;
-            border: 1px solid #555;
-            border-radius: 5px;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease-in-out;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        /* Special keys (Backspace, Tab, Shift, Enter, Space) */
-        .esc { width: 75px; }
-        .backspace { width: 90px; }
-        .tab { width: 70px; }
-        .caps { width: 80px; }
-        .enter { width: 50px; }
-        .shift { width: 80px; }
-        .space { width: 255px; height: 45px; }
-
-        /* Key hover effect */
-        .key:hover {
-            background: #444;
-        }
-
-        /* Key press effect */
-        .key:active, .key.active {
-            background: #666;
-            transform: translateY(2px);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Adjust F1-F12 key sizes 
-        .key[data-key^="F"] {
-            width: 40px;
-        } */
-
-        /* Add some spacing between certain rows 
-        .row:nth-child(2), .row:nth-child(4) {
-            margin-top: 5px;
-        }*/
-        
-        /* Responsive behavior */
-        @media (max-width: 768px) {
-            .key {
-                width: 40px;
-                height: 40px;
-                font-size: 12px;
-            }
-            .space { width: 250px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!DOCTYPE html>
-<html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,10 +77,9 @@
         }
     </style>
 </head>
-<body>
+<body onload="startGame()">
     <div class="keyboard">
         <div class="row">
-            <!-- <div class="key esc" data-key="Escape" data-code="Escape">ESC</div> -->
             <div class="key" data-key="'" data-code="IntlBackslash">'</div>
             <div class="key" data-key="1" data-code="Digit1">1</div>
             <div class="key" data-key="2" data-code="Digit2">2</div>
@@ -239,6 +148,129 @@
             <div class="key space" data-key=" " data-code="Space">Space</div>
         </div>
     </div>
-    <script src="gameScript.js"></script>
+    <!-- <script src="gameScript.js"></script> -->
+
+    <script>
+        function showGame() {
+            document.getElementById("game").innerHTML = /*HTML*/`
+                <iframe src="indexStuff/gameSetup.html" width="100%" height="500px"></iframe>
+                <div>
+                    <input type="range" name="level" id="cursor" min="1" max="10" step="1">
+                    <button id="startGame" onclick="startGame()">Start Whack a Mole!</button>
+                    <p id="score">Score: 0</p>
+                </div>
+            `;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const keys = document.querySelectorAll(".key");
+            const keyMap = {};
+            const codeMap = {};
+            const immediateReleaseKeys = ["CapsLock", "Tab", "ShiftLeft", "ShiftRight"];
+
+            let score = 0;
+            let level = 1;
+            let moleTimeLimit = 5000; // Start at 5s
+            let gameDuration = 120000; // 2 minutes
+            let molePosition;
+            let moleTimeout;
+            let gameTimer;
+            let gameActive = false;
+
+            keys.forEach((key) => {
+                if (key.dataset.key) keyMap[key.dataset.key.toUpperCase()] = key;
+                if (key.dataset.code) codeMap[key.dataset.code] = key;
+            });
+
+            function startGame() {
+                if (gameActive) return; // Prevent multiple game instances
+                gameActive = true;
+
+                score = 0;
+                level = 1;
+                moleTimeLimit = 5000;
+                updateScore();
+
+                document.getElementById("startGame").disabled = true; // Disable start button
+
+                placeMole();
+
+                clearTimeout(gameTimer);
+                gameTimer = setTimeout(() => {
+                    alert(`Game Over! Final Score: ${score}`);
+                    clearTimeout(moleTimeout);
+                    gameActive = false;
+                    document.getElementById("startGame").disabled = false; // Re-enable button
+                }, gameDuration);
+            }
+
+            function placeMole() {
+                if (molePosition) molePosition.classList.remove("mole");
+
+                const randomIndex = Math.floor(Math.random() * keys.length);
+                molePosition = keys[randomIndex];
+                molePosition.classList.add("mole");
+
+                clearTimeout(moleTimeout);
+                moleTimeout = setTimeout(() => {
+                    score = Math.max(0, score - 1);
+                    updateScore();
+                    placeMole();
+                }, moleTimeLimit);
+            }
+
+            function updateScore() {
+                const scoreElement = document.getElementById("score");
+                if (scoreElement) {
+                    scoreElement.textContent = `Score: ${score}`;
+                }
+            }
+
+            document.addEventListener("keydown", function (event) {
+                const key = event.key.toUpperCase();
+                const code = event.code;
+
+                if (immediateReleaseKeys.includes(code)) event.preventDefault();
+
+                if (codeMap[code]) {
+                    codeMap[code].classList.add("active");
+                } else if (keyMap[key]) {
+                    keyMap[key].classList.add("active");
+                }
+
+                if (immediateReleaseKeys.includes(code)) {
+                    setTimeout(() => {
+                        if (codeMap[code]) codeMap[code].classList.remove("active");
+                        else if (keyMap[key]) keyMap[key].classList.remove("active");
+                    }, 100);
+                }
+
+                if (molePosition && (molePosition === codeMap[code] || molePosition === keyMap[key])) {
+                    score++;
+                    updateScore();
+                    clearTimeout(moleTimeout);
+                    placeMole();
+
+                    if (score % 10 === 0) {
+                        level++;
+                        moleTimeLimit = Math.max(1000, 5000 - level * 500);
+                    }
+                }
+            });
+
+            document.addEventListener("keyup", function (event) {
+                const key = event.key.toUpperCase();
+                const code = event.code;
+
+                if (!immediateReleaseKeys.includes(code)) {
+                    if (codeMap[code]) codeMap[code].classList.remove("active");
+                    else if (keyMap[key]) keyMap[key].classList.remove("active");
+                }
+            });
+
+            window.startGame = startGame; // Make startGame globally accessible
+        });
+
+    </script>
 </body>
 </html>
