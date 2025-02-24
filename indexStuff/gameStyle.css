@@ -1,0 +1,70 @@
+/* General keyboard layout */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: max-content;
+}
+
+/* Row styling */
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* General key styles */
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    font-family:'Alegreya', sans-serif;
+    color: white;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Special keys */
+.esc { width: 75px; }
+.backspace { width: 90px; }
+.tab { width: 70px; }
+.caps { width: 80px; }
+.enter { width: 70px; }
+.shift { width: 90px; }
+.space { width: 255px; height: 45px; }
+
+/* Key hover effect */
+.key:hover {
+    background: #444;
+}
+
+/* Key press effect */
+.key:active, .key.active {
+    background: #666;
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .key {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .space { width: 250px; }
+}

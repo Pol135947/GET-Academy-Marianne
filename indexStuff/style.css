@@ -1,65 +1,127 @@
-
 @font-face {
     font-family: 'Cursif';
     src: url('Cursif.woff2') format('woff2'),
-        url('Cursif.woff') format('woff');
+         url('Cursif.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-h1, h2 {
-    background-color: crimson;
-    border:double 5px black;
-    text-align: center;
-    align-items: center;
-    text-shadow:5px 10px 10px black;
-    width:page;
-    height: fit-content;
-
-}
-body{
+/* General Styling */
+body {
     background-color: aqua;
-    font-family:'Alegreya', sans-serif;
+    font-family: 'Alegreya', sans-serif;
+    margin: 0;
+    padding: 0;
 }
-u {
-    text-decoration: none;
+
+/* Headings */
+h1, h2 {
+    background-color: #CC0000;
+    border: double 5px black;
+    text-align: center;
+    text-shadow: 5px 10px 10px black;
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
 }
+
 h1 {
     color: white;
-    font-family:'Alegreya', sans-serif;
-    font-size:50px;
+    font-size: 50px;
 }
+
 h2 {
     color: white;
     font-family: 'Cursif', sans-serif;
-    font-size:20px;
+    font-size: 20px;
 }
-#app{
-    font-family:'Alegreya', sans-serif;
+
+/* Links */
+u {
+    text-decoration: none;
+}
+
+/* Main App Container */
+#app {
     font-size: 16px;
-    margin:5px;
+    margin: 5px;
 }
-#game{
+
+/* Game Section */
+#game {
     margin-top: 10px;
     font-size: 20px;
     text-align: center;
 }
-.red{
+
+/* Color Mix for Text */
+.red {
     color: red;
-    text-shadow:5px 10px 10px color-mix(in srgb, red 25%, black 75%);
-}
-.blue{
-    color: blue;
-    text-shadow:5px 10px 10px darkblue;
-}
-.newLayout{
-    flex-wrap: wrap-reverse;
+    text-shadow: 5px 10px 10px rgba(0, 0, 0, 0.75);
 }
 
-img{
-    display: none;
-    width: auto;
-    height: 100px;
+.blue {
+    color: blue;
+    text-shadow: 5px 10px 10px darkblue;
+}
+
+/* New Layout Section */
+.newLayout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    background-color: #00CCCC;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
     margin-top: 20px;
+}
+
+/* List Items */
+.newLayout li {
+    list-style: none;
+    padding: 10px;
+    background-color: aqua;
+    border: 2px solid mediumturquoise;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.newLayout li:hover {
+    background-color: rgb(143, 252, 252);
+}
+
+/* Image Handling */
+.newLayout img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+.newLayout li:hover img {
+    display: block;
+}
+
+/* Image Field */
+#imgField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+#imgField img {
+    display: block;
+    max-width: 400px;
+    height: auto;
+    margin: 10px auto 0;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
 }

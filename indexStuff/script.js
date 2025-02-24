@@ -43,6 +43,8 @@ function updateView() {
                 <li onmouseover="showImage(this)">Greek/Roman mythology</li>
             </div>
         </u>  
+        <div id="imgField"></div>
+        <div id="game" onclick="showGame()"> Start Game ! </div>
     </div>
     `;
     }
@@ -51,17 +53,33 @@ updateView()
 
 // Controller
 
+let layout = false; // Store layout state globally
+
 function newLayout() {
-    var content = document.getElementById('intro');
-    content.className = "newLayout";
+    let introElement = document.getElementById('intro');
+
+    if (!layout) {
+        introElement.classList.add("newLayout");
+    } else {
+        introElement.classList.remove("newLayout");
+    }
+
+    layout = !layout; // Toggle layout state
 
     // Use a safer color mix
-    document.getElementById('h2').style.backgroundColor = "rgb(153, 0, 153)";
+    document.getElementById('h2').style.backgroundColor =" #CC00CC"
+    document.getElementById('h2').style.color = " #CCCC00"
     document.getElementById('h2').innerHTML = 
     `Roses are <span class="red"> red, </span> violets are <span class="blue"> blue</span>...`;
 }
 
+// Controller
 function showImage(li) {
-    let img = li.previousElementSibling; // Select the associated image
-    img.style.display = (img.style.display === "none" || img.style.display === "") ? "block" : "none";
+    let img = li.previousElementSibling.cloneNode(true); // Clone the associated image
+    let imgField = document.getElementById('imgField');
+    
+    // Clear previous image and append the new one
+    imgField.innerHTML = '';
+    img.style.display = "block";
+    imgField.appendChild(img);
 }
