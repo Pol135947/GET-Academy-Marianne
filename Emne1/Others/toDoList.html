@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>To Do list</title>
+    <style>
+        table, tr, td, th {
+            border: 1px solid lightgray;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            padding: 4px;
+        }
+
+        th {
+            background-color: darkblue;
+            border: 1px solid darkblue;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+
+<table id="tasksTable"></table>
+<p>
+    <input id="person" type="text"/>
+    <input id="taskDescription" type="text"/>
+    <input id="deadline" type="date"/>
+    <button onclick="addTask()">Legg til oppgave</button>
+</p>
+<script>
+    // Model
+    var tasks = [
+        { person:'Odin', description: 'Handle til middag', isDone: true, deadline: "", doneDate: "" },
+        { person:'Tor', description: 'Lage middag', isDone: false, deadline: "", doneDate: "" },
+        { person:'Baldr', description: 'Spise middag', isDone: true, deadline: "", doneDate: "" },
+    ];
+
+    // Controller
+
+    function addTask() {
+        tasks.push({
+            person: document.getElementById('person').value,
+            description: document.getElementById('taskDescription').value,
+            isDone: false,
+            deadline: document.getElementById('deadline').value,
+            doneDate: "" 
+        });
+        document.getElementById('person').value = "";
+        document.getElementById('taskDescription').value = "";
+        document.getElementById('deadline').value = "";
+        show();
+    }
+
+    // View
+    function show() {
+        let html = `
+            <tr>
+                <th>Person</th>
+                <th>Oppgave</th>
+                <th>Gjort</th>
+                <th>Deadline</th>
+                <th>Gjort dato</th>
+                <th></th>
+            </tr>`;
+
+        for (let i = 0; i < tasks.length; i++) {
+            html += createHtmlRow(i);
+        }
+        document.getElementById('tasksTable').innerHTML = html;
+    }
+
+    function createHtmlRow(i) {
+        const task = tasks[i];
+        const checkedHtml = task.isDone ? 'checked' : '';
+
+        if (!task.editMode) {
+            return `
+            <tr>
+                <td>${task.person}</td>
+                <td>${task.description}</td>
+                <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                <td>${task.deadline}</td>
+                <td>${task.doneDate || '-'}</td>
+                <td>
+                    <button onclick="deleteTask(${i})">Slett</button>
+                    <button onclick="editTask(${i})">Rediger</button>
+                </td>
+            </tr>`;
+        }
+
+        return `
+        <tr>
+            <td><input id="editPerson${i}" type="text" value="${task.person}"/></td>
+            <td><input id="editDescription${i}" type="text" value="${task.description}"/></td>
+            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+            <td><input id="editDeadline${i}" type="date" value="${task.deadline}"/></td>
+            <td>${task.doneDate || '-'}</td>
+            <td>
+                <button onclick="updateTask(${i})">Lagre</button>
+            </td>
+        </tr>`;
+    }
+
+    function changeIsDone(checkbox, index) {
+        tasks[index].isDone = checkbox.checked;
+        tasks[index].doneDate = checkbox.checked ? new Date().toISOString().split('T')[0] : "";
+        show();
+    }
+
+    function deleteTask(index) {
+        tasks.splice(index, 1);
+        show();
+    }
+
+    function editTask(index) {
+        tasks[index].editMode = true;
+        show();
+    }
+
+    function updateTask(index) {
+        const task = tasks[index];
+        task.person = document.getElementById(`editPerson${index}`).value;
+        task.description = document.getElementById(`editDescription${index}`).value;
+        task.deadline = document.getElementById(`editDeadline${index}`).value;
+        task.editMode = false;
+        show();
+    }
+
+    show();
+</script>
+
+</body>
+</html>

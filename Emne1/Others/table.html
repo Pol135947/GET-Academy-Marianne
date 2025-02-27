@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek & Roman Gods Game</title>
+    <style>
+        body {
+            font-family: Georgia, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        table {
+            margin: 20px auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        td, th {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: turquoise;
+            border: 1px solid darkblue;
+            color: blue;
+        }
+        tr:nth-child(even){
+            background-color: lightskyblue;
+        }
+        .hidden {
+            color: gray;
+        }
+        .feedback {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        button {
+            font-family: Georgia, sans-serif;
+            margin: 5px;
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Greek & Roman Gods Game</h1>
+    <h3>Guess the name of the gods!</h3>
+    <table id="godsTable"></table>
+
+    <div>
+        <button onclick="hideAll()">Hide All</button>
+        <button onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <p>
+        <input type="text" id="guessInput" placeholder="Enter Greek or Roman God" onkeydown="if (event.code === 'Enter') checkGuess()">
+        <button onclick="checkGuess()">Submit</button>
+        <button onclick="hint()">Hint</button>
+    </p>
+
+    <p class="feedback" id="feedback"></p>
+    <h2>Score: <span id="score">0</span></h2>
+
+    <script>
+        var gods = [
+            { greekName: 'Aphrodite', romanName: 'Venus' },
+            { greekName: 'Apollo', romanName: 'Apollo' },
+            { greekName: 'Ares', romanName: 'Mars' },
+            { greekName: 'Artemis', romanName: 'Diana' },
+            { greekName: 'Athena', romanName: 'Minerva' },
+            { greekName: 'Demeter', romanName: 'Ceres' },
+            { greekName: 'Dionysus', romanName: 'Bacchus' },
+            { greekName: 'Hephaestus', romanName: 'Vulcan' },
+            { greekName: 'Hera', romanName: 'Juno' },
+            { greekName: 'Hermes', romanName: 'Mercury' },
+            { greekName: 'Hestia', romanName: 'Vesta' },
+            { greekName: 'Hades', romanName: 'Pluto' },
+            { greekName: 'Poseidon', romanName: 'Neptune' },
+            { greekName: 'Zeus', romanName: 'Jupiter' },
+            { greekName: 'Cronus', romanName: 'Saturn' },
+            { greekName: 'Ouranus', romanName: 'Uranus' },
+            { greekName: 'Asclepios', romanName: 'Esculape' },
+        ];
+
+        var godsTable = document.getElementById('godsTable');
+        var feedback = document.getElementById('feedback');
+        var scoreDisplay = document.getElementById('score');
+        var guessInput = document.getElementById('guessInput');
+
+        var revealed = new Set(); // Track revealed names
+        var score = 0;
+
+        function show() {
+            let html = `
+            <tr> 
+                <th>Greek Name</th>
+                <th>Roman Name</th>
+            </tr>`;
+
+            for (let god of gods) {
+                let greekDisplay = revealed.has(god.greekName) ? god.greekName : "???";
+                let romanDisplay = revealed.has(god.romanName) ? god.romanName : "???";
+
+                html += `
+                <tr>
+                    <td class="${revealed.has(god.greekName) ? '' : 'hidden'}">${greekDisplay}</td>
+                    <td class="${revealed.has(god.romanName) ? '' : 'hidden'}">${romanDisplay}</td>
+                </tr>`;
+            }
+            godsTable.innerHTML = html;
+        }
+
+        function hideAll() {
+            revealed.clear();
+            show();
+            feedback.textContent = "";
+            guessInput.value = "";
+        }
+
+        function checkGuess() {
+            let guess = guessInput.value.trim().toLowerCase();
+            if (!guess) return;
+
+            let godEntry = gods.find(g => g.greekName.toLowerCase() === guess || g.romanName.toLowerCase() === guess);
+
+            if (godEntry) {
+                if (godEntry.greekName.toLowerCase() === guess) {
+                    revealed.add(godEntry.greekName);
+                    guessInput.value = godEntry.greekName; // Show correct answer
+                } else {
+                    revealed.add(godEntry.romanName);
+                    guessInput.value = godEntry.romanName; // Show correct answer
+                }
+                show();
+                feedback.textContent = "Correct! " + guessInput.value;
+                feedback.className = "feedback correct";
+                updateScore();
+                guessInput.value = "";
+            } else {
+                feedback.textContent = "Incorrect! Try again.";
+                feedback.className = "feedback incorrect";
+                guessInput.value = "";
+            }
+        }
+
+        function updateScore() {
+            score++;
+            scoreDisplay.textContent = score;
+        }
+
+        function resetGame() {
+            hideAll();
+            score = 0;
+            scoreDisplay.textContent = score;
+        }
+
+        function hint() {
+            let guess = guessInput.value.trim().toLowerCase();
+            if (!guess) {
+                feedback.textContent = "Enter a name to get a hint!";
+                feedback.className = "feedback incorrect";
+                return;
+            }
+
+            let godEntry = gods.find(g => g.greekName.toLowerCase() === guess || g.romanName.toLowerCase() === guess);
+
+            if (godEntry) {
+                if (godEntry.greekName.toLowerCase() === guess) {
+                    feedback.textContent = "Hint: Roman name starts with " + godEntry.romanName.charAt(0);
+                } else {
+                    feedback.textContent = "Hint: Greek name starts with " + godEntry.greekName.charAt(0);
+                }
+                feedback.className = "feedback";
+            } else {
+                feedback.textContent = "No matching god found!";
+                feedback.className = "feedback incorrect";
+            }
+        }
+
+        // Initial render with all names hidden
+        hideAll();
+    </script>
+</body>
+</html>

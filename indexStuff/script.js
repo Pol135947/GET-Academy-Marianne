@@ -43,9 +43,9 @@ function updateView() {
                 <li onmouseover="showImage(this)">Greek/Roman mythology</li>
             </div>
         </u>  
+    </div>
         <div id="imgField"></div>
         <div id="game" onclick="showGame()"> Start Game ! </div>
-    </div>
     `;
     }
 
@@ -67,8 +67,8 @@ function newLayout() {
     layout = !layout; // Toggle layout state
 
     // Use a safer color mix
-    document.getElementById('h2').style.backgroundColor =" #CC00CC"
-    document.getElementById('h2').style.color = " #CCCC00"
+    document.getElementById('h2').style.backgroundImage =  "radial-gradient(aqua, blue)";
+    document.getElementById('h2').style.color = "black";
     document.getElementById('h2').innerHTML = 
     `Roses are <span class="red"> red, </span> violets are <span class="blue"> blue</span>...`;
 }

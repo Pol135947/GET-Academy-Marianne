@@ -1,40 +1,40 @@
 // Model
 
 // Global game variables
-let keys, keyMap = {}, codeMap = {};
 const immediateReleaseKeys = ["CapsLock", "Tab", "ShiftLeft", "ShiftRight"];
+let keys, keyMap = {}, codeMap = {};
+let score = 0, level = 1, moleTimeLimit = 5000;
+const gameDuration = 120000;
+let molePosition, moleTimeout, gameTimer, countdown, gameActive = false, lastMoleTime;
 
-let score = 0;
-let level = 1;
-let moleTimeLimit = 5000; // 5 seconds initially
-const gameDuration = 120000; // 2 minutes
-let molePosition;
-let moleTimeout;
-let gameTimer;
-let gameActive = false;
-let countdown;
-let lastMoleTime = Date.now();
-
+// Initialize game elements
+function initGame() {
+    keys = document.querySelectorAll(".key");
+    keyMap = {};
+    codeMap = {};
+    keys.forEach(key => {
+        if (key.dataset.key) keyMap[key.dataset.key.toUpperCase()] = key;
+        if (key.dataset.code) codeMap[key.dataset.code] = key;
+    });
+}
 // Sound effects
 
 // const hitSound = new Audio("indexStuff/hit.mp3");
 // const missSound = new Audio("indexStuff/miss.mp3");
 
-
-// Initialize game-related variables after the game HTML is inserted
-function initGame() {
-    keys = document.querySelectorAll(".key");
-    keyMap = {};
-    codeMap = {};
-    keys.forEach((key) => {
-        if (key.dataset.key) keyMap[key.dataset.key.toUpperCase()] = key;
-        if (key.dataset.code) codeMap[key.dataset.code] = key;
-    });
-}
-
 // View
-function showGame() {
-    document.getElementById("game").innerHTML = /*HTML*/`
+
+const gameTemplate = /*HTML*/`
+  <div class="game-container">
+    <div class="game-header">
+      <h2>Whack-a-Mole Keyboard Game</h2>
+      <div class="game-stats">
+        <div id="score">Score: 0</div>
+        <div id="timer">Time Left: 120s</div>
+        <div id="level">Level: 1</div>
+      </div>
+      <button id="startGame" class="game-button" onclick="startGame()">Start Whack a Mole!</button>
+    </div>
     <div class="keyboard">
         <div class="row">
             <div class="key" data-key="'" data-code="IntlBackslash">'</div>
@@ -88,6 +88,7 @@ function showGame() {
 
         <div class="row">
             <div class="key shift" data-key="Shift" data-code="ShiftLeft">Shift</div>
+            <div class="key" data-key="<" data-code="Comma"><</div>
             <div class="key" data-key="Z" data-code="KeyZ">Z</div>
             <div class="key" data-key="X" data-code="KeyX">X</div>
             <div class="key" data-key="C" data-code="KeyC">C</div>
@@ -104,13 +105,12 @@ function showGame() {
         <div class="row">
             <div class="key space" data-key=" " data-code="Space">Space</div>
         </div>
-        <div style="text-align:center; margin-top:20px;">
-            <button id="startGame" onclick="startGame()">Start Whack a Mole!</button>
-            <div id="score" style="text-align:center; font-size:20px; margin-top:10px;">Score: 0</div>
-            <div id="timer" style="text-align:center; font-size:18px; margin-top:5px;">Time Left: 120s</div>
-            </div>
-        </div>
-    `;
+    </div>
+  </div>
+`;
+
+function showGame() {
+    document.getElementById("game").innerHTML = gameTemplate
     document.getElementById("startGame").addEventListener("click", startGame);
     initGame(); // Ensure keys are detected properly
 
@@ -118,8 +118,43 @@ function showGame() {
 // Controller
 
 // Starts the game
+
+// class KeyboardGame {
+//     constructor() {
+//       this.score = 0;
+//       this.level = 1;
+//       this.moleTimeLimit = 5000;
+//       this.gameDuration = 120000;
+//       this.gameActive = false;
+//       this.molePosition = null;
+//       this.lastMoleTime = 0;
+//       this.timers = {
+//         mole: null,
+//         game: null,
+//         countdown: null
+//       };
+//     }
+  
+//     init() {
+//       this.initializeKeyboard();
+//       this.bindEvents();
+//       this.updateScore();
+//     }
+  
+//     initializeKeyboard() {
+//       this.keys = document.querySelectorAll(".key");
+//       this.keyMap = {};
+//       this.codeMap = {};
+//       this.keys.forEach(key => {
+//         if (key.dataset.key) this.keyMap[key.dataset.key.toUpperCase()] = key;
+//         if (key.dataset.code) this.codeMap[key.dataset.code] = key;
+//       });
+//     }
+// }
+
 function startGame() {
     if (gameActive) return;
+
     gameActive = true;
 
     score = 0;
@@ -132,13 +167,7 @@ function startGame() {
     clearTimeout(gameTimer);
     clearInterval(countdown);
 
-    gameTimer = setTimeout(() => {
-        alert(`Game Over! Final Score: ${score}`);
-        clearTimeout(moleTimeout);
-        clearInterval(countdown);
-        gameActive = false;
-        document.getElementById("startGame").disabled = false;
-    }, gameDuration);
+    gameTimer = setTimeout(endGame, gameDuration);
 
     let timeLeft = gameDuration / 1000;
     const timerElement = document.getElementById("timer");
@@ -150,6 +179,15 @@ function startGame() {
         timeLeft--;
         timerElement.textContent = `Time Left: ${timeLeft}s`;
     }, 1000);
+}
+
+// Ends the game
+function endGame() {
+    alert(`Game Over! Final Score: ${score}`);
+    clearTimeout(moleTimeout);
+    clearInterval(countdown);
+    gameActive = false;
+    document.getElementById("startGame").disabled = false;
 }
 
 // Places the mole on a random key
@@ -173,48 +211,41 @@ function placeMole() {
 // Updates the score display
 function updateScore() {
     const scoreElement = document.getElementById("score");
-    if (scoreElement) {
-        scoreElement.textContent = `Score: ${score}`;
-    }
+    if (scoreElement) scoreElement.textContent = `Score: ${score}`;
 }
 
-// Listen for keydown events
+// Keydown event listener
 document.addEventListener("keydown", function (event) {
     const key = event.key.toUpperCase();
     const code = event.code;
-
+    
     if (immediateReleaseKeys.includes(code)) event.preventDefault();
-
-    if (codeMap[code]) {
-        codeMap[code].classList.add("active");
-    } else if (keyMap[key]) {
-        keyMap[key].classList.add("active");
-    }
-
+    
+    if (codeMap[code]) codeMap[code].classList.add("active");
+    else if (keyMap[key]) keyMap[key].classList.add("active");
+    
     if (immediateReleaseKeys.includes(code)) {
         setTimeout(() => {
             if (codeMap[code]) codeMap[code].classList.remove("active");
             else if (keyMap[key]) keyMap[key].classList.remove("active");
         }, 100);
     }
-
+    
     if (molePosition && (molePosition === codeMap[code] || molePosition === keyMap[key])) {
         let reactionTime = Date.now() - lastMoleTime;
         let multiplier = reactionTime < 1000 ? 2 : 1;
         score += multiplier;
-
         updateScore();
-        // hitSound.play();
         clearTimeout(moleTimeout);
         placeMole();
     }
 });
 
-// Remove the "active" class on keyup
+// Keyup event listener
 document.addEventListener("keyup", function (event) {
     const key = event.key.toUpperCase();
     const code = event.code;
-
+    
     if (!immediateReleaseKeys.includes(code)) {
         if (codeMap[code]) codeMap[code].classList.remove("active");
         else if (keyMap[key]) keyMap[key].classList.remove("active");

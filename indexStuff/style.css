@@ -17,8 +17,7 @@ body {
 
 /* Headings */
 h1, h2 {
-    background-color: #CC0000;
-    border: double 5px black;
+    background-image:radial-gradient(blue, aqua); 
     text-align: center;
     text-shadow: 5px 10px 10px black;
     width: 100%;
@@ -32,7 +31,7 @@ h1 {
 }
 
 h2 {
-    color: white;
+    color: azure;
     font-family: 'Cursif', sans-serif;
     font-size: 20px;
 }
@@ -84,8 +83,8 @@ u {
     padding: 10px;
     background-color: aqua;
     border: 2px solid mediumturquoise;
-    border-radius: 5px;
     text-align: center;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, opacity 0.3s ease;
 }

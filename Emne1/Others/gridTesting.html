@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List</title>
+    <style>
+        body {
+            background-color: slategray;
+            font-family: 'Trebuchet MS', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        h2:hover {
+            color: lightgray;
+        }
+        .container {
+            margin: auto;
+            padding: 20px;
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-image: radial-gradient(lightgray, grey);
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        .visible {
+            display: grid;
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body onload="loadGames()">
+    <h2 onclick="toggleSection('popGames')">Popular Games</h2>
+    <div class="container" id="popGames"></div>
+
+    <h2 onclick="toggleSection('allGames')">All Games</h2>
+    <div class="container" id="allGames"></div>
+
+    <script>
+        const gamesList = [
+            { gameName: 'Genshin Impact', gamePicture: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5d/Genshin_Impact_logo.svg/2880px-Genshin_Impact_logo.svg.png'},
+            { gameName: 'Honkai Star Rail', gamePicture: 'https://upload.wikimedia.org/wikipedia/en/7/7f/Honkai_Star_Rail_%28logo%29.png' },
+            { gameName: 'Zenless Zone Zero', gamePicture: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Zenless_Zone_Zero_curved_box_logo.svg/1280px-Zenless_Zone_Zero_curved_box_logo.svg.png' },
+            { gameName: 'Honkai Impact 3rd', gamePicture: 'https://upload.wikimedia.org/wikipedia/en/d/da/Honkai_Impact_3rd_logo.png' },
+        ];
+
+        function toggleSection(sectionId) {
+            document.getElementById(sectionId).classList.toggle("visible");
+        }
+
+        function createGameCard(game) {
+            const card = document.createElement("div");
+            card.className = "game-card";
+            card.innerHTML = `
+                <img src="${game.gamePicture}" alt="${game.gameName}">
+                <p>${game.gameName}</p>
+            `;
+            return card;
+        }
+
+        function loadGames() {
+            const popGamesDiv = document.getElementById("popGames");
+            const allGamesDiv = document.getElementById("allGames");
+
+            gamesList.forEach(game => {
+                popGamesDiv.appendChild(createGameCard(game));
+                allGamesDiv.appendChild(createGameCard(game));
+            });
+        }
+    </script>
+</body>
+</html>

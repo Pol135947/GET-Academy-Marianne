@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Birthday Roast Speech</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #34495e;
+            --secondary: #e74c3c;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/800/400') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .speech {
+            padding: 2rem 0;
+        }
+        
+        .speech p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .speech strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .speech-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .speech-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .highlight {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--accent);
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            border-top: 1px solid var(--accent);
+            border-bottom: 1px solid var(--accent);
+        }
+        
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-align: right;
+            margin-top: 3rem;
+            font-size: 1.2rem;
+        }
+        
+        .quote {
+            position: relative;
+            font-style: italic;
+            padding: 1rem 2rem;
+            margin: 1.5rem 0;
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .quote::before {
+            content: "";
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -1rem;
+            left: 0.5rem;
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin: 0 0.2rem;
+        }
+        
+        .gif-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+        
+        .memory-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .memory-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary);
+        }
+        
+        .memory-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center center;
+            background-size: contain;
+            opacity: 0;
+            animation: float 5s ease-in forwards;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .speech p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <header>
+        <div class="container">
+            <h1>A Birthday Roast Speech</h1>
+            <p>Five years in the making</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="speech">
+            <div class="speech-section">
+                <p><strong>Ladies and Gentlemen, and my brother especially.</strong></p>
+                <p>Remember when I said I was gonna to go easy on you? I lied.</p>
+                <p>I have been waiting for this exact moment for years, and trust me, I am going to enjoy this very thoroughly. At your expense. Remember. They're just jokes. I hope you are ready, brother, for a speech five entire years in the making, because I will not show as much mercy as my parents. Their speech was cute in comparison to what I have prepared for you.</p>
+            </div>
+
+            <div class="highlight">
+                <p>Dear Martin,</p>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdm1pcTY2aXk3cHh1YnFmYWZld3VibnlrZHR2YjRyemVhbXRkc2c2cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgqQUkXAfQAY0Te/giphy.gif" alt="Siblings growing up together">
+            </div>
+            
+            <div class="speech-section">
+                <p>I have known you for almost 15 years. Imagine that. You went from a cute, small child, who could only point with your fingers when you wanted something and who could not eat an ice cream properly. Then, you became an annoying brat who couldn't keep his mouth shut as you transitioned to become what one may call a teenager. Or in your case, since you started your rebellious years three years earlier, an immature preteen. Miraculously, I finished with a somewhat tolerable brother. How? No clue. One of life's greatest mysteries I suppose. Not that I complain of course.</p>
+                <p>These 15 years have given me ample material to portray you in the most realistic way I can as your sister. You're lucky. Having a personal roastmaster. People pay fortunes you know.</p>
+            </div>
+            
+            <div class="memory-card">
+                <h3 class="memory-title">Memory #1: First Meeting</h3>
+                <p>You have always been a loudmouth. From when we first picked you up 14 years ago in the middle of Seoul, took you with us, tore you from whom you saw as "mother" and we had to take a taxi back to our hotel, all while our ears took the brunt of a lifetime. Poor driver. He had to listen to your crying for the entire ride. The amount of lungs a one year old can have… It's insane. The crying lasted a while, even when we arrived, but fortunately, the crying took a lot out of you and went to sleep eventually.</p>
+                <div class="image-container">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW0wMTlhdXNnYXdkY21uaDMyM2E3Z2F4N3Z6ODYyMmJuZXBxaTVoZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3q2RauzE5Vzf7iYo/giphy.gif" alt="Baby Martin crying">
+                </div>
+            </div>
+            
+            <div class="speech-section">
+                <p>You resorted quickly to this method of… let's say expressing yourself, as with all children. It could be that you were displeased about something, could be anything by the way, to when you're happy, or sad. Whatever emotion you felt, we could tell, and hear there was something. It took you a while to understand the concept of whispering. To be completely honest, I'm still unsure if it's mastered.</p>
+                <p>In your early years, we would joke about how you were the epitome of "Jean qui pleure, Jean qui rit", basically that you could smoothly transition from crying to laughing in the span of ten seconds. Idk if it's a normal thing or it's something else, but it was quite… interesting, and a bit nerve wracking to watch (poor parents).</p>
+            </div>
+            
+            <div class="quote">
+                <p>Something else we would joke about was about your three greatest fears. Green food like vegetables, staying with Mum for more than five seconds, and the food running out.</p>
+                <div class="image-container">
+                    <img src="https://i.redd.it/j5wbw3v0hv9e1.jpeg" alt="The three normal fears of our Generations">
+                </div>
+            
+            </div>
+            
+            <div class="speech-section">
+                <p>First one was hilarious, the greener the scarier. The second was because you were literally glued to dad. Sorry. Superglued. As for the third, while that one is a valid concern, it isn't when your plate is double the size of the rest of us, and you're just a three year old kid who can barely speak.</p>
+                <p>Later on, as you passed the four year mark, you became what one would call in gentler terms, a little rascal. You couldn't keep your hands to yourself, but you quickly learned that putting your fingers under a treadmill wasn't the best idea you've had. I have found pictures of your fingers after that… incident, but for everyone's sake, and to avoid some flashbacks, I will not show it. It's not pretty.</p>
+                <p>That rascal part of you, the one that would constantly push limits, found a catalyst in the friends you made along the way. I remember so many things that I am sure you weren't the mastermind behind, but still. I've lost count of the amount of times you and your friends came knocking and practically begged for it. I would run after you, and if I could get my hands on you, I'd tickle you to death, which usually ended up with cries, and me being scolded for it. Thanks a lot.</p>
+            </div>
+            
+            <div class="memory-card">
+                <h3 class="memory-title">Memory #2: Vocabulary Evolution</h3>
+                <p>With the years passing, and with the "broadening" of your horizons, your vocabulary started to follow and become… let's say more colourful…. No one was spared, although there was clear discrimination between family members. I won't go into too much detail or mention them here, as it would take a couple minutes to list them all. I must confess, sometimes I wonder if you at all know what they mean. Because while those kinds of words can be powerful, they lose a lot of their power if you employ them at the wrong times. Not to mention, there are a lot of creative ways to be insulting that don't necessarily have to be overt. You should research it. It's hilarious.</p>
+                <div class="image-container">
+                    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnA3NnV4cTd4ang5dXUyYTJkOHNweXZnYTR6NmpkODNqMzk5bTMzbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y1MRzTqh9duq9sCmOC/giphy.gif" alt="Martin with colorful speech bubbles">
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p>The Great Food Incident <span class="emoji">🍝</span></p>
+            </div>
+            
+            <div class="speech-section">
+                <p>To really show everyone how… creative one can be, three years ago, you were home with Emil. Dinner time, Mum noticed you both finished your plate in a suspicious amount of time. Idk what kind of instinct that made her push you for answers, but eventually you both fessed up. Basically, you didn't like a dish she had put her heart into, and you threw it away. Not in the green trash like any normal person would've done, but outside, underneath a plank right outside the window. Coincidentally, dad wasn't at home but on a trip to Singapore. You wouldn't have dared to do such a thing if he was there, would you?</p>
+                <p>Anyway, Mum wasn't happy to say the least, mostly because of the risk of having rodents and rats, and ordered you guys to clean it up. You even had the AUDACITY and GALL to ask ME to do it, which I promptly refused. In the end, you started, albeit very reluctantly, to clean up your mess. It sounded like you guys were touching your worst nightmares with all the screaming and yelling. Overreacting a bit? It was pasta, sausages and some old stuff. Because believe it or not, it wasn't their first time throwing the food away. Cue to 30 seconds later and I find you both throwing the food, mixed with a decent amount of mud at each other. Disclaimer, I did find the goodness in my heart to help you at the very end of the cleanup. You're welcome.</p>
+            </div>
+            
+            <div class="memory-card">
+                <h3 class="memory-title">Memory #3: Fashion Experiments</h3>
+                <p>If you weren't testing out the limits of our sanity, you were trying to find your way in the complex world of fashion. You went bald one day, without warning, and I left the room out of pure shock. Thanks a lot. Another time, you decided out of the blue you wanted earrings and hair colouring cause one of your friends thought it was a good idea. Dad was very skeptical, Mum was… supportive for a lack of a better term. I'm sure you're thankful Mum didn't win that argument. Can you imagine? Martin with piercings, earrings and coloured hair? That would be quite a sight to see…. That said, it never happened and as a bonus, we've managed to talk you out of any tattoos in the foreseeable future. It's a win. Like the saying goes, just cause your friend jumps off a cliff doesn't mean you need to follow. You're smart. Think before you make a stupid mistake that you will regret in the future.</p>
+                <div class="image-container">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTlvZzBrMjh5bnkzamVxdjVjdHpqM3d5Y2hpaG8wY2RqazFjMGJuNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4ah0igooeeQYQNifeE/giphy.gif" alt="Martin's fashion experiments">
+                </div>
+            </div>
+            
+            <div class="speech-section">
+                <p>You grew up in a family whose center of interest lies far from the world of fashion and materialism. Until we got Mina in our lives. She worked as a model, and had a much deeper interest in that world than us, and you found yourself drawn into it. Like a moth to a flame. While it did generate some arguments, especially in your… less tasteful and flashy stages, it's still a valid interest. The problems we had were in other… aspects.</p>
+                <p>Dropshipping. To be honest with you, I had never heard the term until then. But the funny thing is, my first thought was "That's gotta be a red flag of some sort. It sounds like those lame ass TikTok scams of some sort". Listen, falling for these sorts of scams is so beneath you, as you're someone with potential still left unfulfilled. Materialism can be a great source of motivation in life. Trust me, as someone who doesn't have that, I wish I too had that drive. Just remember, make sure to control it, and don't let it control you.</p>
+            </div>
+            
+            <div class="quote">
+                <p>We are very different, as you've probably noticed. While you're loud and a handful… (I'm joking, but you get the point).</p>
+            </div>
+            
+            <div class="speech-section">
+                <p>For example, you taught me that two identical T-shirts can be very different if their brands aren't the same. For someone who sees clothes for their practical purposes, not their aesthetic or branding, it's something completely alien for me. We probably have the same amount of clothes. Ish. Difference is, while you use close to 100%, I barely touch 10%. 20% if I feel like it. And I am being generous in that assessment.</p>
+                <p>You're interested in sports and being with friends, I'm interested in the art of spending the least amount of effort possible in a day as well as calculating how much time I can be alone with my cat. You sleep like a teenager, I wish I could. You love sugar and sweets and have a talent to find the sweetest thing in the fridge. Guess what? I look for the healthiest. (No I don't)</p>
+            </div>
+            
+            <div class="memory-card">
+                <h3 class="memory-title">Memory #4: The Toothpaste Tube</h3>
+                <p>You've taught me a lot about myself. For one, I learned that I have a deep reserves of something called patience. You should try. It's a useful skill. With you… how to explain… Have you guys gone through this? It's late. Evening. Almost time to sleep. But then you realise you've forgotten about a deadline and you scramble to finish whatever you had with the last of the energy. Like trying to squeeze the last remaining toothpaste out of the tube. That's how I feel living with this 15 year old brat. Only you have a deadline almost everyday without any warning and the nearest convenience store is out of toothpaste. A very stress and anxiety free life as you can imagine.</p>
+                <div class="image-container">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc21ucnM1bmFlemZkcnJmdjN1a2Y4MDVoaDg5MDh4dGx1cGwzMGpzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1FMaabePDEfgk/giphy.gif" alt="Empty toothpaste tube metaphor">
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p>From the Heart <span class="emoji">❤️</span></p>
+            </div>
+            
+            <div class="speech-section">
+                <p>You came into my life when I was six. I was as unprepared as one could be, for a child who would become the world for many of us here today. Hell, everyone here sees you for the amazing person you've become. While I'll admit, I've wanted to kill you many times, like all healthy siblings at least once, (Hey, siblings in the audience, don't pretend you're innocent of this!) I'm happy I didn't and that you're here today. We may not agree on everything, hell, we'll probably yell and insult each other on an almost weekly basis if not daily, but I want you to know that you're my brother, no matter what our DNA may say.</p>
+            </div>
+            
+            <div class="signature">
+                <p>Happy birthday,</p>
+                <p>Your sister, Marianne.</p>
+            </div>
+            
+            <div class="gif-container">
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGpuN2Z0MGRxNWVucnI0dGVocnZleGlwbndpcG1qemdhcGhuZ2JubyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PCaTwWxIRreaA/giphy.gif" alt="Sibling love gif">
+            </div>
+            
+            <button class="button" id="celebrate-btn">Celebrate Martin!</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>A birthday speech delivered with love and a healthy dose of sibling roasting</p>
+        <p>&copy; 2025 Marianne</p>
+    </footer>
+    
+    <script>
+        // Generate floating hearts when the celebrate button is clicked
+        document.getElementById('celebrate-btn').addEventListener('click', function() {
+            createHearts(50);
+        });
+        
+        // Function to create floating hearts
+        function createHearts(count) {
+            const container = document.getElementById('hearts-container');
+            
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Random position
+                const xPos = Math.random() * 100;
+                const delay = Math.random() * 2;
+                const size = Math.random() * 30 + 10;
+                
+                heart.style.left = xPos + 'vw';
+                heart.style.bottom = '-50px';
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                heart.style.animationDelay = delay + 's';
+                
+                container.appendChild(heart);
+                
+                // Remove heart after animation ends
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000 + delay * 1000);
+            }
+        }
+        
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.speech-section, .memory-card, .highlight');
+            
+            function checkScroll() {
+                const triggerBottom = window.innerHeight * 0.8;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if (sectionTop < triggerBottom) {
+                        section.style.opacity = 1;
+                    } else {
+                        section.style.opacity = 0.7;
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        });
+        
+        // Easter egg: Double click anywhere to show a heart
+        document.addEventListener('dblclick', function(e) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.width = '30px';
+            heart.style.height = '30px';
+            
+            document.getElementById('hearts-container').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

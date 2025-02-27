@@ -67,4 +67,7 @@
       document.getElementById('page').style.backgroundColor = color;
    }
 </script>
+
+<!-- INPUTS -->
+<input type="number, text" onkeydown="if (event.code === 'Enter') event()"> //to detect enter being pressed 
 ```
