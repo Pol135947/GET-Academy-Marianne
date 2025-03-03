@@ -9,10 +9,15 @@
 
 /* General Styling */
 body {
-    background-color: aqua;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    background-color: lightcyan;
     font-family: 'Alegreya', sans-serif;
-    margin: 0;
-    padding: 0;
+  
 }
 
 /* Headings */
