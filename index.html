@@ -16,9 +16,14 @@
     <title>INTRO PAGE</title>
 
 </head>
-<body onload="updateView()">
+<body>
     <div id="app"></div>
     <script src="indexStuff/script.js"></script>
     <script src="indexStuff/gameScript.js"></script>
+    <script>
+        window.onload = function() {
+            updateView();
+        };  
+    </script>
 </body>
 </html>
