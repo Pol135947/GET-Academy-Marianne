@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Farming Simulator</title>
+</head>
+<body>
+    <h2>Tacet Simulator</h2>
+    <label for="tacetLocation">Select Location:</label>
+    <select id="tacetLocation"></select>
+
+    <label for="tacetMainStat3">Select 3-Cost Main Stat:</label>
+    <select id="tacetMainStat3"></select>
+
+    <label for="tacetMainStat1">Select 1-Cost Main Stat:</label>
+    <select id="tacetMainStat1"></select>
+
+    <label for="tacetRepetitions">Number of Repetitions:</label>
+    <input type="number" id="tacetRepetitions" min="1" value="1">
+
+    <button onclick="runTacetSimulation()">Simulate Tacet</button>
+    <div id="tacetOutput"></div>
+
+    <h2>Boss Simulator</h2>
+    <label for="bossLocation">Select Location:</label>
+    <select id="bossLocation"></select>
+
+    <label for="bossMainStat4">Select 4-Cost Main Stat:</label>
+    <select id="bossMainStat4"></select>
+
+    <label for="bossRepetitions">Number of Repetitions:</label>
+    <input type="number" id="bossRepetitions" min="1" value="1">
+
+    <button onclick="runBossSimulation()">Simulate Boss</button>
+    <div id="bossOutput"></div>
+
+    <script src="Emne1/echoFarmingSimulator/echofarmingScript.js"></script>
+
+</body>
+</html>
