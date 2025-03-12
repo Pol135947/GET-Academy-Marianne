@@ -17,27 +17,6 @@ const locations = {
     "Riccioli Islands": ["Eternal Radiance", "Tidebreaking Courage"]
 };
 
-function populateDropdown(selectId, options) {
-    const selectElement = document.getElementById(selectId);
-    selectElement.innerHTML = "";
-    options.forEach(option => {
-        const opt = document.createElement("option");
-        opt.value = option;
-        opt.textContent = option;
-        selectElement.appendChild(opt);
-    });
-}
-
-// Populate dropdowns on page load
-window.onload = function() {
-    populateDropdown("tacetLocation", Object.keys(locations));
-    populateDropdown("bossLocation", Object.keys(locations));
-
-    populateDropdown("tacetMainStat3", mainStats.threeCost);
-    populateDropdown("tacetMainStat1", mainStats.oneCost);
-    populateDropdown("bossMainStat4", mainStats.fourCost);
-};
-
 const Freezing_Frost = {
     oneCost: ["Clang Bang", "Excarat", "Fusion Prism", "Glacio Predator", "Glacio Prism", "Gulpuff", "Hoartoise", "Sabyr Boar"],
     threeCost: ["Autopuppet Scout", "Glacio Dreadmane", "Lumiscale Construct", "Roseshroom", "Tambourinist"],
@@ -124,66 +103,42 @@ const Tidebreaking_Courage = {
 
 const sonataSets = [Freezing_Frost, Molten_Rift, Void_Thunder, Sierra_Gale, Celestial_Light, Havoc_Eclipse, Rejuvenating_Glow, Moonlit_Clouds, Lingering_Tunes, Frosty_Resolve, Eternal_Radiance, Midnight_Veil, Empyrean_Anthem, Tidebreaking_Courage];
 
-const tacetTypes = [threeCost, oneCost] 
-const bossTypes = [fourCost]
+const echoesSet = [
+    "Freezing Frost", "Molten Rift", "Void Thunder", "Sierra Gale", "Celestial Light", 
+    "Havoc Eclipse", "Rejuvenating Glow", "Moonlit Clouds", "Lingering Tunes", 
+    "Frosty Resolve", "Eternal Radiance", "Midnight Veil", "Empyrean Anthem", 
+    "Tidebreaking Courage"
+];
 
+const tacetTypes = ["threeCost", "oneCost"] 
+const bossTypes = ["fourCost"]
 
-// function farmingExperience(drops, rightThreeCost, rightOneCost, rightSet) {
-//     let useful = 0;
-//     let useless = 0;
+function populateDropdown(selectId, options) {
+    const selectElement = document.getElementById(selectId);
+    selectElement.innerHTML = "";
+    options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        selectElement.appendChild(opt);
+    });
+}
 
-//     for (let i = 0; i < drops; i++) {
-//         let echoType = getRandomElement(echoTypes);
-//         let echoSet = getRandomElement(sonataEffects);
-//         let echoName = getRandomElement(echoSet === "Eternal Radiance" ? Eternal_Radiance[echoType] : Tidebreaking_Courage[echoType]);
-//         let mainstat = getRandomElement(mainStats[echoType]);
+// Populate dropdowns on page load
+window.onload = function() {
+    populateDropdown("tacetLocation", Object.keys(locations));
+    populateDropdown("bossLocation", Object.keys(locations));
+    populateDropdown("tacetSet", echoesSet);
+    populateDropdown("bossSet", echoesSet);
 
-//         console.log(`\nDropped: ${echoName} (${echoSet}) | Main Stat: ${mainstat}`);
-
-//         if (echoType === "threeCost") {
-//             if (mainstat === rightThreeCost) {
-//                 if (echoSet === rightSet) {
-//                     useful++;
-//                     console.log("✔ Right set! Expect the rolls to go to shit.");
-//                 } else {
-//                     useless++;
-//                     console.log("❌ Wrong set. Pain.");
-//                 }
-//             } else {
-//                 useless++;
-//                 console.log("❌ Garbage.");
-//             }
-//         } else if (echoType === "oneCost") {
-//             if (mainstat === rightOneCost) {
-//                 if (echoSet === rightSet) {
-//                     useful++;
-//                     console.log("✔ Perfect drop! Just need good rolls...");
-//                 } else {
-//                     useless++;
-//                     console.log("⚠ Wrong set, but at least it's useful... cope.");
-//                 }
-//             } else {
-//                 useless++;
-//                 console.log("❌ Better luck next time.");
-//             }
-//         }
-//     }
-
-//     console.log(`\nUseful echoes: ${useful}, Useless echoes: ${useless}`);
-//     console.log(`🔹 ${(useful / drops * 100).toFixed(2)}% of echoes were useful, the rest is trash.\n`);
-// }
-
-// console.log("Phoebe's Average Farming Experience:");
-// farmingExperience(12, "Spectro DMG bonus", "Atk%", "Eternal Radiance");
-
-// console.log("Brant's Average Farming Experience:");
-// farmingExperience(12, "Energy Regen", "Atk%", "Tidebreaking Courage");
+    populateDropdown("tacetMainStat3", mainStats.threeCost);
+    populateDropdown("tacetMainStat1", mainStats.oneCost);
+    populateDropdown("bossMainStat4", mainStats.fourCost);
+};
 
 function getRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-
-
 
 function runTacetSimulation() {
     const location = document.getElementById("tacetLocation").value;
@@ -192,7 +147,10 @@ function runTacetSimulation() {
     const repetitions = parseInt(document.getElementById("tacetRepetitions").value);
 
     const sonataSets = locations[location] || [];
+
+    const messageDiv = document.getElementById("message")
     const outputDiv = document.getElementById("tacetOutput");
+
 
     let useful = 0;
     let useless = 0;
@@ -203,35 +161,37 @@ function runTacetSimulation() {
         let mainstat = getRandomElement(mainStats[echoType]);
         let echoName = getRandomElement(echoSet[echoType])
         
-        console.log(`Echo: ${echoName}, Type: ${echoType}, Main Stat: ${mainstat}, Set: ${echoSet}`)
+        outputDiv.innerHTML(`Echo: ${echoName}, Type: ${echoType}, Main Stat: ${mainstat}, Set: ${echoSet}`)
+
+        if (echoType === "threeCost") {
+            if (mainstat === mainStat3) {
+                if (echoSet === rightSet) {
+                    useful++;
+                    outputDiv.innerHTML = ("✔ Right set! Expect the rolls to go to shit.");
+                } else {
+                    useless++;
+                    outputDiv.innerHTML("❌ Wrong set. Pain.");
+                }
+            } else {
+                useless++;
+                outputDiv.innerHTML("❌ Garbage.");
+            }
+        } else if (echoType === "oneCost") {
+            if (mainstat === mainStat1) {
+                if (echoSet === rightSet) {
+                    useful++;
+                    outputDiv.innerHTML("✔ Perfect drop! Just need good rolls...");
+                } else {
+                    useless++;
+                    outputDiv.innerHTML("⚠ Wrong set, but at least it's useful... cope.");
+                }
+            } else {
+                useless++;
+                outputDiv.innerHTML("❌ Better luck next time.");
+            }
+        }
     }
-
-    outputDiv.innerHTML = `
-        <strong>Location:</strong> ${location} <br>
-        <strong>Sonata Sets:</strong> ${sonataSets.join(", ")} <br>
-        <strong>Selected 3-Cost Main Stat:</strong> ${mainStat3} <br>
-        <strong>Selected 1-Cost Main Stat:</strong> ${mainStat1} <br>
-        <strong>Repetitions:</strong> ${repetitions}
-    `;
 }
-
-function runBossSimulation() {
-    const location = document.getElementById("bossLocation").value;
-    const mainStat4 = document.getElementById("bossMainStat4").value;
-    const repetitions = parseInt(document.getElementById("bossRepetitions").value);
-
-    const sonataSets = locations[location] || [];
-    const outputDiv = document.getElementById("bossOutput");
-
-    outputDiv.innerHTML = `
-        <strong>Location:</strong> ${location} <br>
-        <strong>Sonata Sets:</strong> ${sonataSets.join(", ")} <br>
-        <strong>Selected 4-Cost Main Stat:</strong> ${mainStat4} <br>
-        <strong>Repetitions:</strong> ${repetitions}
-    `;
-}
-
-
 
 function runBossSimulation() {
     const location = document.getElementById("bossLocation").value;

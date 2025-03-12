@@ -7,35 +7,62 @@
 </head>
 <body>
     <h2>Tacet Simulator</h2>
-    <label for="tacetLocation">Select Location:</label>
-    <select id="tacetLocation"></select>
+    <div class="content">
+        <div class="box">
+            <label for="tacetLocation">Select Location:</label>
+            <select id="tacetLocation"></select>
+        </div>
 
-    <label for="tacetMainStat3">Select 3-Cost Main Stat:</label>
-    <select id="tacetMainStat3"></select>
+        <div class="box"> 
+            <label for="tacetSet">Select Set:</label>
+            <select id="tacetSet"></select>
+        </div>
 
-    <label for="tacetMainStat1">Select 1-Cost Main Stat:</label>
-    <select id="tacetMainStat1"></select>
+        <div class="box">
+            <label for="tacetMainStat3">Select 3-Cost Main Stat:</label>
+            <select id="tacetMainStat3"></select>
+        </div>
 
-    <label for="tacetRepetitions">Number of Repetitions:</label>
-    <input type="number" id="tacetRepetitions" min="1" value="1">
+        <div class="box">
+            <label for="tacetMainStat1">Select 1-Cost Main Stat:</label>
+            <select id="tacetMainStat1"></select>
+        </div>
 
-    <button onclick="runTacetSimulation()">Simulate Tacet</button>
-    <div id="tacetOutput"></div>
+        <div class="box">
+            <label for="tacetRepetitions">Number of Repetitions:</label>
+            <input type="number" id="tacetRepetitions" min="1" value="1">
+        </div>
+
+        <button onclick="runTacetSimulation()">Simulate Tacet</button>
+        <div id="tacetOutput"></div>
+    </div>
 
     <h2>Boss Simulator</h2>
-    <label for="bossLocation">Select Location:</label>
-    <select id="bossLocation"></select>
+    <div class="content">
+        <div class="box">
+            <label for="bossLocation">Select Location:</label>
+            <select id="bossLocation"></select>
+        </div>
 
-    <label for="bossMainStat4">Select 4-Cost Main Stat:</label>
-    <select id="bossMainStat4"></select>
+        <div class="box">
+            <label for="bossSet">Select Set:</label>
+            <select id="bossSet"></select>
+        </div>
 
-    <label for="bossRepetitions">Number of Repetitions:</label>
-    <input type="number" id="bossRepetitions" min="1" value="1">
+        <div class="box">
+            <label for="bossMainStat4">Select 4-Cost Main Stat:</label>
+            <select id="bossMainStat4"></select>
+        </div>
 
-    <button onclick="runBossSimulation()">Simulate Boss</button>
-    <div id="bossOutput"></div>
+        <div class="box">
+            <label for="bossRepetitions">Number of Repetitions:</label>
+            <input type="number" id="bossRepetitions" min="1" value="1">
+        </div>
 
-    <script src="Emne1/echoFarmingSimulator/echofarmingScript.js"></script>
+        <button onclick="runBossSimulation()">Simulate Boss</button>
+        <div id="bossOutput"></div>
+    </div>
 
+    <script src="echofarmingScript.js"></script>
 </body>
 </html>
