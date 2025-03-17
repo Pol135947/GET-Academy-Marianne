@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Echo Farming Simulator</title>
+    <link rel="stylesheet" href="echofarmingStyle.css">
 </head>
 <body>
     <h2>Tacet Simulator</h2>
@@ -14,53 +15,72 @@
         </div>
 
         <div class="box"> 
-            <label for="tacetSet">Select Set:</label>
+            <label for="tacetSet">Target Set:</label>
             <select id="tacetSet"></select>
         </div>
 
         <div class="box">
-            <label for="tacetMainStat3">Select 3-Cost Main Stat:</label>
+            <label for="tacetMainStat3">Desired 3-Cost Main Stat:</label>
             <select id="tacetMainStat3"></select>
         </div>
 
         <div class="box">
-            <label for="tacetMainStat1">Select 1-Cost Main Stat:</label>
+            <label for="tacetMainStat1">Desired 1-Cost Main Stat:</label>
             <select id="tacetMainStat1"></select>
         </div>
 
         <div class="box">
-            <label for="tacetRepetitions">Number of Repetitions:</label>
-            <input type="number" id="tacetRepetitions" min="1" value="1">
+            <label for="tacetRepetitions">Number of Simulations:</label>
+            <input type="number" id="tacetRepetitions" min="1" value="10">
         </div>
 
-        <button onclick="runTacetSimulation()">Simulate Tacet</button>
+        <div class="box">
+            <div id="tacetMessage"></div>
+        </div>
+
+        <button onclick="runTacetSimulation()">Simulate Tacet Farming</button>
         <div id="tacetOutput"></div>
     </div>
 
     <h2>Boss Simulator</h2>
     <div class="content">
         <div class="box">
-            <label for="bossLocation">Select Location:</label>
-            <select id="bossLocation"></select>
+            <label for="bossName">Select Boss:</label>
+            <select id="bossName"></select>
+            <div class="tooltip">ⓘ
+                <span class="tooltip-text">Each boss drops a specific 4-cost echo belonging to a particular set</span>
+            </div>
         </div>
 
         <div class="box">
-            <label for="bossSet">Select Set:</label>
+            <label for="bossSet">Target Set:</label>
             <select id="bossSet"></select>
         </div>
 
         <div class="box">
-            <label for="bossMainStat4">Select 4-Cost Main Stat:</label>
+            <label for="bossMainStat4">Desired 4-Cost Main Stat:</label>
             <select id="bossMainStat4"></select>
         </div>
 
         <div class="box">
-            <label for="bossRepetitions">Number of Repetitions:</label>
-            <input type="number" id="bossRepetitions" min="1" value="1">
+            <label for="bossRepetitions">Number of Simulations:</label>
+            <input type="number" id="bossRepetitions" min="1" value="10">
         </div>
 
-        <button onclick="runBossSimulation()">Simulate Boss</button>
+        <button onclick="runBossSimulation()">Simulate Boss Farming</button>
         <div id="bossOutput"></div>
+    </div>
+
+    <div class="content info-section">
+        <h3>About This Simulator</h3>
+        <p>This simulator helps you estimate your chances of getting useful Echoes when farming in Wuthering Waves. The simulator accounts for:</p>
+        <ul>
+            <li>Location-specific Echo sets for Tacet farming</li>
+            <li>Boss-specific Echo drops</li>
+            <li>Random main stat distribution</li>
+            <li>Set matching requirements</li>
+        </ul>
+        <p>Run multiple simulations to get a better idea of your expected farming efficiency!</p>
     </div>
 
     <script src="echofarmingScript.js"></script>

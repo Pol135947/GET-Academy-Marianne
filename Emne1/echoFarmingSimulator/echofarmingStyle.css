@@ -1,0 +1,239 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f1923;
+    color: #e0e0e0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+h2 {
+    color: #4cc9f0;
+    text-align: center;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4361ee;
+    text-shadow: 0 0 5px rgba(76, 201, 240, 0.5);
+}
+
+.content {
+    background-color: #1a2634;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Form elements */
+.box {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #b8c4d9;
+    font-weight: 500;
+}
+
+select, input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #4361ee;
+    background-color: #2a3a4f;
+    color: #e0e0e0;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+select:focus, input:focus {
+    border-color: #4cc9f0;
+    box-shadow: 0 0 0 2px rgba(76, 201, 240, 0.3);
+}
+
+input[type="number"] {
+    width: 100%;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(to right, #4361ee, #4cc9f0);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(67, 97, 238, 0.3);
+    width: 100%;
+}
+
+button:hover {
+    background: linear-gradient(to right, #3a56d4, #3db8df);
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.5);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(67, 97, 238, 0.3);
+}
+
+/* Results styling */
+#tacetOutput, #bossOutput {
+    background-color: #263445;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    border-left: 4px solid #4cc9f0;
+}
+
+#tacetMessage, #bossMessage {
+    font-weight: bold;
+    color: #f0d74c;
+    margin: 10px 0;
+    min-height: 24px;
+}
+
+.simulation-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.simulation-result {
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #1e293b;
+    transition: all 0.3s ease;
+}
+
+.simulation-result:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.simulation-result.useful {
+    border-left: 4px solid #4ade80;
+}
+
+.simulation-result.useless {
+    border-left: 4px solid #f87171;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content {
+        padding: 15px;
+    }
+    
+    .simulation-results {
+        grid-template-columns: 1fr;
+    }
+    
+    button {
+        padding: 10px 16px;
+    }
+}
+
+/* Echo color coding */
+.echo-item {
+    position: relative;
+    padding-left: 20px;
+}
+
+.echo-4cost {
+    color: #f59e0b; /* gold */
+}
+
+.echo-3cost {
+    color: #8b5cf6; /* purple */
+}
+
+.echo-1cost {
+    color: #60a5fa; /* blue */
+}
+
+/* Success indicators */
+.success-rate {
+    font-size: 20px;
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.high-success {
+    color: #4ade80;
+}
+
+.medium-success {
+    color: #facc15;
+}
+
+.low-success {
+    color: #f87171;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #0f1923;
+    color: #e0e0e0;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid #4361ee;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a2634;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4361ee;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4cc9f0;
+}
