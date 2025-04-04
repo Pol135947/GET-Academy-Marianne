@@ -1,19 +1,31 @@
 // Model
-let age = getAge();
-function getAge(){
-    // Calculate age only once
-    const yearOfBirth = 2004;
-    const monthOfBirth = 7; // August (0-based index)
-    const dayOfBirth = 23;
-    let today = new Date();
-    let age = today.getFullYear() - yearOfBirth;
+const model = {
+    app: {
+        currentPage: "mainPage",
+        pageList: ["mainPage", "gamePage"],
+    },
+    input: {
+        currentKeyPressed:null,
+        currentMole:null,
 
-    // Adjust if birthday hasn't happened this year
-    if (today.getMonth() < monthOfBirth || (today.getMonth() === monthOfBirth && today.getDate() < dayOfBirth)) {
-        age--;
+    },
+    data: {
+        birth: { day: 23, month: 8, year: 2004 }, // Note: month is 8 (August), but JavaScript months are 0-based
+        today: new Date(),
+        age: function () {
+            const today = this.today; // Use this.today instead of creating a new Date object
+            const yearOfBirth = this.birth.year;
+            const monthOfBirth = this.birth.month - 1; // Convert to 0-based index
+            const dayOfBirth = this.birth.day;
+
+            let age = today.getFullYear() - yearOfBirth;
+            if (today.getMonth() < monthOfBirth || (today.getMonth() === monthOfBirth && today.getDate() < dayOfBirth)) {
+                age--; // Reduce age if birthday hasn't occurred yet this year
+            }
+            return age;
+        }
     }
-    return age;
-    }
+};
 
 // View 
 
@@ -24,7 +36,7 @@ function updateView() {
     <div> About me : </div>
     <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Repository </a> <br>
     <div onclick="newLayout()">
-        <div id="myAge"> My name is Marianne Mahieu. I'm ${age} years of age. </div> 
+        <div id="myAge"> My name is Marianne Mahieu. I'm ${model.data.age()} years of age. </div> 
         <u>
             <div id='intro'> Here are a couple of my hobbies outside of programming ; <br>
                 <img src="indexStuff/img/piano.webp" style="display: none;">
@@ -45,7 +57,7 @@ function updateView() {
         </u>  
     </div>
         <div id="imgField"></div>
-        <div id="game" onclick="showGame()"> Start Game ! </div>
+        <div id="game" onclick="showGame()"> Show Game ! </div>
     `;
     }
 
