@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Event Viewer</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Event Viewer</title>
     <style>
     :root {
         --primary-color: #007BFF;
@@ -133,178 +133,191 @@
         }
     }
     </style>
-  
+
 </head>
 <body>
-  <div id="eventContainer"></div>
+<div id="eventContainer"></div>
 
-  <script>
-  
-  const model = {
+<script>
+
+const model = {
     input: {
-      event: {
-        title: "", place: "", date: "",
-        description: "", extraInfo: "", attendees: []
-      }
-    },
-    data: {
-      savedEvents: [
-        {
-          title: "Title 1",
-          place: "Location 1",
-          date: "2024-04-01",
-          description: "Description 1",
-          extraInfo: "Extra info 1",
-          attendees: [{ name: "Mercury" }, { name: "Venus" }, { name: "Mars" }]
-        },
-        {
-          title: "Title 2",
-          place: "Location 2",
-          date: "2024-05-01",
-          description: "Description 2",
-          extraInfo: "Extra info 2",
-          attendees: [{ name: "Jupiter" }, { name: "Saturn" }]
+        event: {
+            title: "", place: "", date: "",
+            description: "", extraInfo: "", attendees: []
         }
-      ]
+        },
+    data: {
+        savedEvents: [
+            {
+            title: "Title 1",
+            place: "Location 1",
+            date: "2024-04-01",
+            slope: "black",
+            description: "Description 1",
+            extraInfo: "Extra info 1",
+            attendees: [{ name: "Mercury" }, { name: "Venus" }, { name: "Mars" }]
+            },
+            {
+            title: "Title 2",
+            place: "Location 2",
+            date: "2024-05-01",
+            slope: "black",
+            description: "Description 2",
+            extraInfo: "Extra info 2",
+            attendees: [{ name: "Jupiter" }, { name: "Saturn" }]
+            }
+        ],
+        users: [
+            {id:0, name: "Mercury", status: "online"}, 
+            {id:1, name: "Venus", status: "online"}, 
+            {id:2, name: "Earth", status: "online"}, 
+            {id:3, name: "Mars", status: "online"}, 
+            {id:4, name: "Jupiter", status: "online"}, 
+            {id:5, name: "Saturn", status: "online"}, 
+            {id:6, name: "Uranus", status: "online"}, 
+            {id:7, name: "Neptune", status: "online"}, 
+            {id:8, name: "Pluto", status: "online"}, 
+        ],
     }
-  };
-  
-  const eventArray = model.data.savedEvents;
-  
-  function showAllEvents() {
+};
+
+const eventArray = model.data.savedEvents;
+
+function showAllEvents() {
     const container = document.getElementById('eventContainer');
     container.innerHTML = `
-      <table id="eventTable">
+    <table id="eventTable">
         <tr>
-          <th>Title</th><th>Location</th><th>Date</th>
-          <th>Description</th><th>Attendees</th><th>Actions</th>
+        <th>Title</th><th>Location</th><th>Date</th>
+        <th>Description</th><th>Attendees</th><th>Actions</th>
         </tr>
-      </table>
-      <button onclick="createNewEvent()">Create Event</button>
+    </table>
+    <button onclick="createNewEvent()">Create Event</button>
     `;
-  
+
     const table = document.getElementById('eventTable');
     eventArray.forEach((e, i) => {
-      table.innerHTML += `
+    table.innerHTML += `
         <tr>
-          <td>${e.title}</td>
-          <td>${e.place}</td>
-          <td>${e.date}</td>
-          <td>${e.description}</td>
-          <td>${e.attendees.length}</td>
-          <td>
+        <td>${e.title}</td>
+        <td>${e.place}</td>
+        <td>${e.date}</td>
+        <td>${e.description}</td>
+        <td>${e.attendees.length}</td>
+        <td>
             <button onclick="showEventPage(${i})">Show</button>
             <button onclick="editEvent(${i})">Edit</button>
-          </td>
+        </td>
         </tr>`;
     });
-  }
-  
-  function showEventPage(index) {
+}
+
+function showEventPage(index) {
     const e = eventArray[index];
     document.getElementById('eventContainer').innerHTML = `
-      <h1>${e.title}</h1>
-      <p><strong>Location:</strong> ${e.place}</p>
-      <p><strong>Date:</strong> ${e.date}</p>
-      <p><strong>Description:</strong> ${e.description}</p>
-      <p><strong>Extra Info:</strong> ${e.extraInfo}</p>
-      <h3>Attendees</h3>
-      <ul>${e.attendees.map(a => `<li>${a.name}</li>`).join('')}</ul>
-      <button onclick="editEvent(${index})">Edit</button>
-      <button onclick="showAllEvents()">Back</button>
+    <h1>${e.title}</h1>
+    <p><strong>Location:</strong> ${e.place}</p>
+    <p><strong>Date:</strong> ${e.date}</p>
+    <p><strong>Description:</strong> ${e.description}</p>
+    <p><strong>Extra Info:</strong> ${e.extraInfo}</p>
+    <h3>Attendees</h3>
+    <ul>${e.attendees.map(a => `<li>${a.name}</li>`).join('')}</ul>
+    <button onclick="editEvent(${index})">Edit</button>
+    <button onclick="showAllEvents()">Back</button>
     `;
-  }
-  
-  function editEvent(index) {
+}
+
+function editEvent(index) {
     const e = model.input.event = { ...eventArray[index] };
     document.getElementById('eventContainer').innerHTML = `
-      <h2>Edit Event</h2>
-      ${eventFormFields(e, 'edit', index)}
-      <h3>Attendees</h3>
-      <ul>${e.attendees.map(a => `<li>${a.name}</li>`).join('')}</ul>
-      <input id="newAttendeeName" placeholder="New attendee name" 
+    <h2>Edit Event</h2>
+    ${eventFormFields(e, 'edit', index)}
+    <h3>Attendees</h3>
+    <ul>${e.attendees.map(a => `<li>${a.name}</li>`).join('')}</ul>
+    <input id="newAttendeeName" placeholder="New attendee name" 
         onkeypress="handleKeyPress(event, ${index}, 'edit-attendee')" />
-      <button onclick="addAttendee(${index})">Add Attendee</button><br><br>
-      <button onclick="updateEvent(${index})">Save</button>
-      <button onclick="showAllEvents()">Cancel</button>
+    <button onclick="addAttendee(${index})">Add Attendee</button><br><br>
+    <button onclick="updateEvent(${index})">Save</button>
+    <button onclick="showAllEvents()">Cancel</button>
     `;
-  }
-  
-  function createNewEvent() {
+}
+
+function createNewEvent() {
     model.input.event = {
-      title: "", place: "", date: "",
-      description: "", extraInfo: "", attendees: []
+    title: "", place: "", date: "",
+    description: "", extraInfo: "", attendees: []
     };
     window.newAttendees = [];
-  
+
     document.getElementById('eventContainer').innerHTML = `
-      <h2>Create New Event</h2>
-      ${eventFormFields(model.input.event, 'new')}
-      <h3>Attendees</h3>
-      <ul id="newAttendeeList"></ul>
-      <input id="newAttendeeName" placeholder="Attendee name" 
+    <h2>Create New Event</h2>
+    ${eventFormFields(model.input.event, 'new')}
+    <h3>Attendees</h3>
+    <ul id="newAttendeeList"></ul>
+    <input id="newAttendeeName" placeholder="Attendee name" 
         onkeypress="handleKeyPress(event, null, 'new-attendee')" />
-      <button onclick="addNewEventAttendee()">Add Attendee</button><br><br>
-      <button onclick="saveNewEvent()">Save Event</button>
-      <button onclick="showAllEvents()">Cancel</button>
+    <button onclick="addNewEventAttendee()">Add Attendee</button><br><br>
+    <button onclick="saveNewEvent()">Save Event</button>
+    <button onclick="showAllEvents()">Cancel</button>
     `;
-  }
-  
-  function eventFormFields(e, mode, index = null) {
+}
+
+function eventFormFields(e, mode, index = null) {
     return `
-      <p>Title:<br> <input id="${mode}Title" value="${e.title}" oninput="model.input.event.title=this.value" /></p>
-      <p>Location:<br> <input id="${mode}Place" value="${e.place}" oninput="model.input.event.place=this.value" /></p>
-      <p>Date:<br> <input id="${mode}Date" type="date" value="${e.date}" oninput="model.input.event.date=this.value" /></p>
-      <p>Description:<br> <input id="${mode}Description" value="${e.description}" oninput="model.input.event.description=this.value" /></p>
-      <p>Extra Info:<br> <input id="${mode}Extra" value="${e.extraInfo}" oninput="model.input.event.extraInfo=this.value"
+    <p>Title:<br> <input id="${mode}Title" value="${e.title}" oninput="model.input.event.title=this.value" /></p>
+    <p>Location:<br> <input id="${mode}Place" value="${e.place}" oninput="model.input.event.place=this.value" /></p>
+    <p>Date:<br> <input id="${mode}Date" type="date" value="${e.date}" oninput="model.input.event.date=this.value" /></p>
+    <p>Description:<br> <input id="${mode}Description" value="${e.description}" oninput="model.input.event.description=this.value" /></p>
+    <p>Extra Info:<br> <input id="${mode}Extra" value="${e.extraInfo}" oninput="model.input.event.extraInfo=this.value"
         onkeypress="handleKeyPress(event, ${index}, 'save-${mode}')" /></p>
     `;
-  }
-  
-  function addAttendee(index) {
+}
+
+function addAttendee(index) {
     const name = document.getElementById('newAttendeeName').value.trim();
     if (name) {
-      eventArray[index].attendees.push({ name });
-      editEvent(index);
+    eventArray[index].attendees.push({ name });
+    editEvent(index);
     }
-  }
-  
-  function updateEvent(index) {
+}
+
+function updateEvent(index) {
     eventArray[index] = { ...model.input.event };
     showAllEvents();
-  }
-  
-  function addNewEventAttendee() {
+}
+
+function addNewEventAttendee() {
     const name = document.getElementById('newAttendeeName').value.trim();
     if (name) {
-      window.newAttendees.push({ name });
-      model.input.event.attendees = window.newAttendees;
-      document.getElementById('newAttendeeName').value = '';
-      renderNewAttendeeList();
+    window.newAttendees.push({ name });
+    model.input.event.attendees = window.newAttendees;
+    document.getElementById('newAttendeeName').value = '';
+    renderNewAttendeeList();
     }
-  }
-  
-  function renderNewAttendeeList() {
+}
+
+function renderNewAttendeeList() {
     const ul = document.getElementById('newAttendeeList');
     ul.innerHTML = window.newAttendees.map(a => `<li>${a.name}</li>`).join('');
-  }
-  
-  function saveNewEvent() {
+}
+
+function saveNewEvent() {
     eventArray.push({ ...model.input.event });
     showAllEvents();
-  }
-  
-  function handleKeyPress(e, index, context) {
+}
+
+function handleKeyPress(e, index, context) {
     if (e.key === 'Enter') {
-      e.preventDefault();
-      if (context === 'new-attendee') addNewEventAttendee();
-      if (context === 'edit-attendee') addAttendee(index);
-      if (context === 'save-edit') updateEvent(index);
-      if (context === 'save-new') saveNewEvent();
+    e.preventDefault();
+    if (context === 'new-attendee') addNewEventAttendee();
+    if (context === 'edit-attendee') addAttendee(index);
+    if (context === 'save-edit') updateEvent(index);
+    if (context === 'save-new') saveNewEvent();
     }
-  }
-  
-  showAllEvents();
+}
+
+showAllEvents();
     
     </script>
     </body>
