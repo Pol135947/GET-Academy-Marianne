@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View all friends</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .friendContainer {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden; /* To contain rounded borders */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+            color: #555;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .friend-search-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .friend-search-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .friend-search-container input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .search-results {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .search-results li {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-results li:last-child {
+            border-bottom: none;
+        }
+
+        .search-results li:hover {
+            background-color: #f0f8ff; /* Light cyan for hover */
+        }
+
+        textarea {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .confirm-delete-buttons button {
+            background-color: #dc3545; /* Red for delete */
+        }
+
+        .confirm-delete-buttons button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="friendContainer" id="friendContainer"></div>
+
+    <script>
+        const model = { // Placeholder - we're working with the data within this
+            app: {},
+            input: {},
+            data: {
+                friends: [
+                    {
+                        id: 2,
+                        username: "user2",
+                        name: "User Two",
+                        aboutMe: "I love skiing!",
+                        favoriteSlopeID: [5],
+                        favoriteLocationID: [1],
+                        status: false,
+                        chat: [],
+                        friendsID: [1, 3, 4],
+                        statistics: [{ daysInSlope: 24, hoursInSlope: 70 }]
+                    },
+                    {
+                        id: 1,
+                        username: "user1",
+                        name: "User One",
+                        aboutMe: "I love snowboarding!",
+                        favoriteSlopeID: [3],
+                        favoriteLocationID: [2],
+                        status: true,
+                        chat: [],
+                        friendsID: [2, 3, 4],
+                        statistics: [{ daysInSlope: 10, hoursInSlope: 50 }]
+                    },
+                    {
+                        id: 3,
+                        username: "user3",
+                        name: "User Three",
+                        aboutMe: "I love both skiing and snowboarding!",
+                        favoriteSlopeID: [2],
+                        favoriteLocationID: [3],
+                        status: true,
+                        chat: [],
+                        friendsID: [2, 3, 4],
+                        statistics: [{ daysInSlope: 10, hoursInSlope: 50 }]
+                    }
+                ],
+                users: [
+                    { id: 4, username: "potentialFriend1", name: "Potential One", aboutMe: "Looking for ski buddies!", favoriteSlopeID: [], favoriteLocationID: [], status: false, chat: [], friendsID: [], statistics: [] },
+                    { id: 5, username: "snowLover22", name: "Snow Fanatic", aboutMe: "Powder days are the best!", favoriteSlopeID: [], favoriteLocationID: [], status: true, chat: [], friendsID: [], statistics: [] },
+                    { id: 6, username: "mountainKing", name: "Peak Explorer", aboutMe: "Exploring all the slopes!", favoriteSlopeID: [], favoriteLocationID: [], status: true, chat: [], friendsID: [], statistics: [] },
+                    { id: 7, username: "chillRider", name: "Easy Going Skier", aboutMe: "Enjoying the chill vibes on the slopes.", favoriteSlopeID: [], favoriteLocationID: [], status: false, chat: [], friendsID: [], statistics: [] },
+                    { id: 8, username: "slopeSeeker", name: "Adventure Bound", aboutMe: "Always up for a new mountain!", favoriteSlopeID: [], favoriteLocationID: [], status: true, chat: [], friendsID: [], statistics: [] }
+                ],
+                locations: [
+                    {
+                        id: 1,
+                        location: "Hemsedal",
+                        slopes: [
+                            { id: 1, name: "Totten-Hemsedal", difficulty: "Easy" },
+                            { id: 2, name: "Tottenløypa No. 5", difficulty: "Difficult" },
+                            { id: 3, name: "Sahaugløypa No. 8", difficulty: "Intermediate" },
+                            { id: 4, name: "Midtløypa No. 14", difficulty: "Intermediate" },
+                            { id: 5, name: "Skarløypa No. 17", difficulty: "Intermediate" },
+                            { id: 6, name: "Hemsedalløypa No. 10", difficulty: "Intermediate" },
+                            { id: 7, name: "Slope No. 32 (Fun Ride)", difficulty: "Easy" },
+                            { id: 8, name: "SnowPark Red", difficulty: "Difficult" },
+                            { id: 9, name: "SnowPark Blue", difficulty: "Intermediate" },
+                            { id: 10, name: "Skicross Track", difficulty: "Intermediate" }
+                        ],
+                    },
+                    {
+                        id: 2,
+                        location: "Trysil",
+                        slopes: [
+                            { id: 1, name: "Trysilfjellet-Trysil", difficulty: "Easy" },
+                            { id: 2, name: "Ekspert'n", difficulty: "Difficult" },
+                            { id: 3, name: "Eventyr", difficulty: "Easy" },
+                            { id: 4, name: "Valle's Ski Area", difficulty: "Easy" },
+                            { id: 5, name: "Snow Park Red & Black", difficulty: "Difficult" },
+                            { id: 6, name: "Snow Park Blue", difficulty: "Intermediate" },
+                            { id: 7, name: "Snow Park Green", difficulty: "Easy" },
+                            { id: 8, name: "Fun Ride", difficulty: "Intermediate" },
+                            { id: 9, name: "Ski Cross Track", difficulty: "Intermediate" },
+                            { id: 10, name: "Parallel Slalom Course", difficulty: "Intermediate" }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        location: "Hafjell",
+                        slopes: [
+                            { id: 1, name: "Hafjell Alpine Centre", difficulty: "Intermediate" },
+                            { id: 2, name: "Lilleputthammer", difficulty: "Easy" },
+                            { id: 3, name: "Hafjell Bike Park", difficulty: "Difficult" },
+                            { id: 4, name: "Hafjell Snow Park", difficulty: "Intermediate" },
+                            { id: 5, name: "Hafjell Cross-Country Arena", difficulty: "Easy" }
+                        ]
+                    },
+                ],
+            }
+        };
+
+        const friendArray = model.data.friends;
+        const usersArray = model.data.users;
+        const locationsArray = model.data.locations;
+        const container = document.getElementById('friendContainer');
+        let searchResultsContainer;
+
+        const realStatus = user => user.status ? "online" : "offline";
+
+        function getLocationName(locationId) {
+            const location = locationsArray.find(loc => loc.id === locationId[0]);
+            return location ? location.location : 'N/A';
+        }
+
+        function getSlopeDetails(locationId, slopeId) {
+            const location = locationsArray.find(loc => loc.id === locationId[0]);
+            if (location && location.slopes) {
+                const slope = location.slopes.find(s => s.id === slopeId[0]);
+                return slope ? `${slope.name} (${slope.difficulty})` : 'N/A';
+            }
+            return 'N/A';
+        }
+
+        function showAllFriends() {
+            container.innerHTML = /*HTML*/ `
+                <h1>Friends</h1>
+                <table id="friendTable">
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Bio</th>
+                        <th>Favourite slope</th>
+                        <th>Favourite location</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </table>
+                <br>
+                <button onclick="addNewFriendView()">Add New Friend</button>
+            `;
+
+            const table = document.getElementById('friendTable');
+            friendArray.forEach((f, i) => {
+                table.innerHTML += /*HTML*/ `
+                    <tr>
+                        <td>${f.name}</td>
+                        <td>${f.username}</td>
+                        <td>${f.aboutMe}</td>
+                        <td>${getSlopeDetails(f.favoriteLocationID, f.favoriteSlopeID)}</td>
+                        <td>${getLocationName(f.favoriteLocationID)}</td>
+                        <td>${realStatus(f)}</td>
+                        <td>
+                            <button onclick="showFriend(${i})">Show</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function showFriend(index) {
+            const f = friendArray[index];
+            document.getElementById('friendContainer').innerHTML = /*HTML*/ `
+                <h1>${f.name}</h1>
+                <p><strong>Name:</strong> ${f.name}</p>
+                <p><strong>Username:</strong> ${f.username}</p>
+                <p><strong>About Me:</strong> ${f.aboutMe}</p>
+                <p><strong>Favourite Slope:</strong> ${getSlopeDetails(f.favoriteLocationID, f.favoriteSlopeID)}</p>
+                <p><strong>Favourite Location:</strong> ${getLocationName(f.favoriteLocationID)}</p>
+                <p><strong>Status:</strong> ${realStatus(f)}</p>
+                <br>
+                <button onclick="editFriend(${index})">Edit</button>
+                <button onclick="showAllFriends()">Back</button>
+            `;
+        }
+
+        function editFriend(index) {
+            const f = friendArray[index];
+            document.getElementById('friendContainer').innerHTML = /*HTML*/ `
+                <h2>Edit Friend</h2>
+                <p><strong>Name:</strong><br>
+                    <textarea id="editName" rows="1" cols="40">${f.name}</textarea>
+                </p>
+                <br>
+                <button onclick="deleteFriendConfirmation(${index})">Delete</button>
+                <button onclick="updateFriend(${index})">Save</button>
+                <button onclick="showFriend(${index})">Cancel</button>
+            `;
+        }
+
+        function deleteFriendConfirmation(index) {
+            const friendToDelete = friendArray[index];
+            document.getElementById('friendContainer').innerHTML = /*HTML*/ `
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete your friend "${friendToDelete.name}"?</p>
+            <button onclick="deleteFriend(${index})">Delete</button>
+            <button onclick="showAllFriends()">Cancel</button>
+            `;
+        }
+
+        function deleteFriend(index) {
+            friendArray.splice(index, 1);
+            showAllFriends();
+        }
+
+        function updateFriend(index) {
+            const newName = document.getElementById('editName').value;
+            friendArray[index].name = newName;
+            showFriend(index);
+        }
+
+        function addNewFriendView() {
+            container.innerHTML = /*HTML*/ `
+                <h2>Add New Friend</h2>
+                <div class="friend-search-container">
+                    <label for="searchUsername">Search by Username:</label>
+                    <input type="text" id="searchUsername" onkeyup="searchUsers()" placeholder="Enter username">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <button onclick="showAllFriends()">Back to Friends</button>
+            `;
+            searchResultsContainer = document.getElementById('searchResults');
+        }
+
+        function searchUsers() {
+            const searchTerm = document.getElementById('searchUsername').value.toLowerCase();
+            const filteredUsers = usersArray.filter(user =>
+                user.username.toLowerCase().includes(searchTerm) &&
+                !friendArray.some(friend => friend.id === user.id) // Don't show existing friends
+            );
+
+            searchResultsContainer.innerHTML = '<ul>' + filteredUsers.map(user => `
+                <li onclick="addFriend(${user.id}, '${user.username}', '${user.name}', '${user.aboutMe}', '${user.favoriteSlopeID}', '${user.favoriteSlopeID}', '${user.status}', '${user.chat}', '${user.friendsID}', '${user.statistics}')">${user.username} (${user.name})</li>
+            `).join('') + '</ul>';
+
+            if (searchTerm === '' || filteredUsers.length === 0) {
+                searchResultsContainer.innerHTML = '<p>No users found.</p>'; // More informative message
+            }
+        }
+
+        function addFriend(userId, username, name, aboutMe, favoriteSlopeID, favoriteLocationID, status, chat, friendsID, statistics) {
+            if (friendArray.some(friend => friend.id === userId)) {
+                alert("This user is already in your friends list.");
+                return;
+            }
+            const newFriend = {
+                id: userId,
+                username: username,
+                name: name,
+                aboutMe: aboutMe,
+                favoriteSlopeID: favoriteSlopeID,
+                favoriteLocationID: favoriteLocationID,
+                status: status,
+                chat: chat,
+                friendsID: friendsID,
+                statistics: statistics
+            };
+            friendArray.push(newFriend);
+            addNewFriendView(); // Refresh the add friend view
+        }
+        
+        // Initial render
+        showAllFriends();
+    </script>
+</body>
+</html>
