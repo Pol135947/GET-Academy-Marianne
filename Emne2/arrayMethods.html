@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test array methods</title>
+
+    <style>
+        body {
+            font-family: Georgia, serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .arrayContainer {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .buttonContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            font-family: Georgia, serif;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body onload="showArray()">
+    <div class="container">
+        <div class="arrayContainer" id="arrayContainer"></div> <br>
+        <p> Test the : </p>
+        <div class="buttonContainer">
+            <button type="button" onclick="pushTest()"> .push()</button> <br>
+            <button type="button" onclick="popTest()"> .pop()</button> <br>
+            <button type="button" onclick="shiftTest()"> .shift()</button> <br>
+            <button type="button" onclick="unshiftTest()"> .unshift()</button> <br>
+            <button type="button" onclick="forEachTest()"> .forEach()</button> <br>
+            <button type="button" onclick="mapTest()"> .map()</button> <br>
+            <button type="button" onclick="filterTest()"> .filter()</button> <br>
+            <button type="button" onclick="reduceTest()"> .reduce()</button> <br>
+            <button type="button" onclick="findTest()"> .find()</button> <br>
+            <button type="button" onclick="sliceTest()"> .slice()</button> <br>
+            <button type="button" onclick="spliceTest()"> .splice()</button> <br>
+            <button type="button" onclick="includesTest()"> .includes()</button> <br>
+            <button type="button" onclick="joinTest()"> .join()</button> <br>
+            <button type="button" onclick="sortTest()"> .sort()</button> <br>
+        </div>
+    </div>
+    <script>
+
+        const arrayContainer = document.getElementById('arrayContainer');
+        let stringArray = ["red", "purple", "blue", "green", "yellow", "orange"];
+        let numberArray = [21, 10, 32, 52, 4, 48];
+
+        function showArray(){
+            arrayContainer.innerHTML = `
+               <div> Array 1: ${stringArray} <br> Array 2: ${numberArray} </div>
+            `;
+        }
+
+        function updateArray(stringArray, numberArray){
+            arrayContainer.innerHTML = `
+               <div> Array 1: ${stringArray} <br> Array 2: ${numberArray} </div>
+            `;
+        }
+
+        function pushTest() {
+            stringArray.push(["black", "white"]);
+            numberArray.push([20, 49]);
+            updateArray(stringArray, numberArray)
+        }
+
+        function popTest() {
+            stringArray.push(["black", "white"]);
+            numberArray.push([20, 49]);
+            updateArray(stringArray, numberArray)
+        }
+        
+
+    </script>
+</body>
+</html>
