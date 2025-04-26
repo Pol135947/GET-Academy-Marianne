@@ -4,7 +4,7 @@
 const immediateReleaseKeys = ["CapsLock", "Tab", "ShiftLeft", "ShiftRight"];
 let keys, keyMap = {}, codeMap = {};
 let score = 0, level = 1, moleTimeLimit = 5000;
-const gameDuration = 120000;
+const gameDuration = 60000;
 let molePosition, moleTimeout, gameTimer, countdown, gameActive = false, lastMoleTime;
 
 // Initialize game elements
@@ -30,7 +30,7 @@ const gameTemplate = /*HTML*/`
       <h2>Whack-a-Mole Keyboard Game</h2>
       <div class="game-stats">
         <div id="score">Score: 0</div>
-        <div id="timer">Time Left: 120s</div>
+        <div id="timer">Time Left: 60s</div>
         <div id="level">Level: 1</div>
       </div>
       <button id="startGame" class="game-button" onclick="startGame()">Start Whack a Mole!</button>
@@ -110,7 +110,7 @@ const gameTemplate = /*HTML*/`
 `;
 
 function showGame() {
-    document.getElementById("game").innerHTML = gameTemplate
+    document.getElementById("gamePage").innerHTML = gameTemplate
     document.getElementById("startGame").addEventListener("click", startGame);
     initGame(); // Ensure keys are detected properly
 

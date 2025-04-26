@@ -7,6 +7,8 @@
     font-display: swap;
 }
 
+
+
 /* General Styling */
 body {
     max-width: 1200px;
@@ -128,4 +130,29 @@ u {
     height: auto;
     margin: 10px auto 0;
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+button {
+    background-color: #00BFFF; /* Green background */
+    border: none;
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around text */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    font-family: inherit;
+}
+
+button:hover {
+background-color: #4169E1; /* Darker green on hover */
+}
+
+button:active {
+background-color: #100e90; /* Even darker green when clicked */
+transform: translateY(1px); /* Slight press down effect */
 }
