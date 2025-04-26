@@ -30,9 +30,9 @@ const model = {
 // View 
 
 function updateView() { 
-    document.getElementById('app').innerHTML = /*HTML*/`
-    <h1 id="h1"> HELLO </h1>
-    <h2 id="h2"> Welcome here </h2>
+    document.getElementById('mainPage').innerHTML = /*HTML*/ `
+    <h1 class="header1" id="h1"> Greetings </h1>
+    <h2 class="header2" id="h2"> Welcome here </h2>
     <div> About me : </div>
     <a href="https://github.com/Pol135947/GET-Academy-Marianne/tree/main"> Repository </a> <br>
     <div onclick="newLayout()">
@@ -56,8 +56,9 @@ function updateView() {
             </div>
         </u>  
     </div>
-        <div id="imgField"></div>
-        <div id="game" onclick="showGame()"> Show Game ! </div>
+    <div id="imgField"></div>
+
+    <button onclick="navigateTo('gamePage')"> Show Game ! </button>
     `;
     }
 
@@ -94,4 +95,29 @@ function showImage(li) {
     imgField.innerHTML = '';
     img.style.display = "block";
     imgField.appendChild(img);
+}
+
+
+function navigateTo(page) {
+    // Hide all sections
+    model.app.pageList.forEach(section => {
+        const element = document.getElementById(section);
+        if (element) {
+            element.style.display = 'none';
+        }
+    });
+
+    // Show the appropriate section
+    switch (page) {
+        case "mainPage":
+            document.getElementById('mainPage').style.display = 'block';
+            updateView()
+            break;
+        case "gamePage":
+            document.getElementById('gamePage').style.display = 'block';
+            showGame()
+            break;
+        default:
+            console.error(`Unknown page: ${page}`);
+    }
 }

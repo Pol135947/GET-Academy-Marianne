@@ -16,8 +16,17 @@
     <title>INTRO PAGE</title>
 
 </head>
-<body onload="updateView()">
-    <div id="app"></div>
+<body onload="navigateTo('mainPage')">
+
+    <div class="appContainer" id="appContainer">
+        <div class="mainPage" id="mainPage"></div>
+        <div class="gamePage" id="gamePage"></div>
+        <button onclick="navigateTo('mainPage')">Go back</button>
+    </div>
+
+    
+
+
     <script src="indexStuff/script.js"></script>
     <script src="indexStuff/gameScript.js"></script>
 </body>

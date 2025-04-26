@@ -110,9 +110,9 @@ const gameTemplate = /*HTML*/`
 `;
 
 function showGame() {
-    document.getElementById("game").innerHTML = gameTemplate
+    document.getElementById("gamePage").innerHTML = gameTemplate
     document.getElementById("startGame").addEventListener("click", startGame);
-    initGame(); // Ensure keys are detected properly
+    initGame(); // Ensure keys are detected properlyæ
 
 }
 // Controller
