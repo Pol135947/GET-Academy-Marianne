@@ -1,2 +1,0 @@
-namespace Emne 3 
-
