@@ -22,7 +22,7 @@ class Program
                     shop.Shopping(checking);
                     break;
                 case "2":
-                    bank.MoneyActions(checking, savings);
+                    bank.BankInterface();
                     break;
                 default:
                     Console.WriteLine("Invalid input");

@@ -25,7 +25,7 @@ public class Shop
         new ShopItem(19, "Desk Chair", 110.00, 7.0),
         new ShopItem(20, "Bookshelf", 85.00, 4.0),
     };
-    public ShopItem? FindItem(string name)
+    public ShopItem? FindItem(string? name)
     {
         return Items.Find(x => x != null && x.Name == name);
     }
@@ -43,7 +43,7 @@ public class Shop
         return Items.FindAll(x => x != null && x.Price >= price && x.Price <= price);
     }
 
-    public void PurchaseItem(string name, Account account)
+    public void PurchaseItem(string? name, Account account)
     {
         ShopItem? item = FindItem(name);
         

@@ -30,16 +30,6 @@ public class ShopItem
         return $"Name: {_name}, Price: {_price}, Amount in stock: {_amount}";
     }
 
-    public void EditPrice(double newPrice)
-    {
-        _price = newPrice;
-    }
-
-    public void EditAmount(double newAmount)
-    {
-        _amount = newAmount;
-    }
-
     public void ReduceAmount()
     {
         _amount -= 1;
